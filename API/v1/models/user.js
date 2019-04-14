@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const rulesModel = require("./rule");
 const shortid = require("shortid");
 
 /**
