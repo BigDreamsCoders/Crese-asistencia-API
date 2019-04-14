@@ -44,6 +44,11 @@ const jwt = require("jsonwebtoken");
 
 exports.insertUser= (req, res, next) => {
     //Verify if a user exists with the same email and name
+    if(!req.body.account || !req.body.email || !req.body.password){
+        return res.status(422).json({
+            message: "Missing fields"
+        })
+    }
     userModel.find({$or: [
         {email: req.body.email},
         {account:  req.body.account}
@@ -137,7 +142,7 @@ exports.insertUser= (req, res, next) => {
  */
 
 exports.requestToken = (req,res,next)=>{
-    userModel.findOne($or [{email: req.body.email}, {account: req.body.account}]).exec().then(doc =>{
+    userModel.findOne({$or: [{email: req.body.email}, {account: req.body.account}]}).exec().then(doc =>{
         if(!doc){
             return res.status(401).json({
                 message: "Authentication failed",
