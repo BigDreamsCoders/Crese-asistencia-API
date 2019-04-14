@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const actionsGET = require("../controllers/user/get");
-const actionPOST = require("../controllers/user/post");
+const actionsPOST = require("../controllers/user/post");
+const actionsDELETE = require("../controllers/user/delete")
 
 //Middleware Calls
 const vToken = require("../middleware/verifyToken");
@@ -11,8 +12,8 @@ const vPermission = require("../middleware/verifyPermission");
 /**
  *   @swagger
  *   tags:
- *      name: users
- *      description: The API manages a user system
+ *      name: user
+ *      description: This section will describe all the avaible routes that are related to user data model
  *
  */
 
@@ -20,8 +21,10 @@ const vPermission = require("../middleware/verifyPermission");
 router.get("/",  actionsGET.allUsers);
 router.get("/:idUser",   actionsGET.oneUser);
 //POST routes
-router.post("/", actionPOST.insertUser);
-router.post("/login", actionPOST.requestToken);
+router.post("/", actionsPOST.insertUser);
+router.post("/login", actionsPOST.requestToken);
+//DELETE routes
+router.delete("/", actionsDELETE.deleteUser);
 
 
 module.exports = router;
