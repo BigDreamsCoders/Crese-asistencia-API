@@ -1,6 +1,6 @@
 //This Js defines roles and all the respective permissions they have
-module.exports = roles.admin = {
-    name: "Admin",
+module.exports = roles = [{
+    name: "admin",
     description: "The one that ontrols all",
     resource : [
         {
@@ -8,9 +8,9 @@ module.exports = roles.admin = {
             permissions: ["create", "read", "update", "delete"]
         },
     ]
-};
-module.exports = roles.client = {
-    name: "Client",
+},
+{
+    name: "client",
     description: "The main consumer of the app",
     resource : [
         {
@@ -18,4 +18,4 @@ module.exports = roles.client = {
             permissions: ["read"]
         },
     ]
-};
+}];
