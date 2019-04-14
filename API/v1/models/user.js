@@ -45,7 +45,7 @@ const userSchema = mongoose.Schema({
     email: {type: String, require: true},
     password: {type: String, require: true},
     dateCreated: {type: String, require: true},
-    status: {type: String, default: 0},
+    status: {type: String, default: 1},
     roles: {type: String, default:"client"}
 });
 

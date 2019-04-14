@@ -143,6 +143,11 @@ exports.requestToken = (req,res,next)=>{
                 message: "Authentication failed",
             });
         }
+        if(doc.status==2){
+            return res.status(403).json({
+                message: "Your account has been blocked for security issues"
+            })
+        }
         bcrypt.compare(req.body.password, doc.password, (err, result)=>{
             if(err){
                 return res.status(500).json({
