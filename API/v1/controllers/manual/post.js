@@ -55,9 +55,9 @@ const manualModel = require("../../models/manual");
  *                              - "control de acceso"
  *          responses:
  *                  '200':
- *                      description: manual record added
+ *                      description: Manual record added
  *                  '422':
- *                      description: manual couldn't be added
+ *                      description: Manual couldn't be added
  *                  '500':
  *                      description: Some kind of error
  */

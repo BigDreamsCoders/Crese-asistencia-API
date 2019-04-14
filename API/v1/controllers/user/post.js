@@ -40,7 +40,7 @@ const jwt = require("jsonwebtoken");
  *                  '200':
  *                      description: User record/s added
  *                  '422':
- *                      description: User couldn't be added
+ *                      description: User couldn't be created
  *                  '500':
  *                      description: Some kind of error
  */

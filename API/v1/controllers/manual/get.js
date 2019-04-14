@@ -29,7 +29,7 @@ const manualModel = require("../../models/manual");
  *                          items:
  *                              $ref: '#/definitions/manual'
  *              '401':
- *                  description: You lack of permissions prevents you for accessing this route
+ *                  description: Your lack of permissions prevents you for accessing this route
  */
 
 exports.getManuals = (req,res,next) =>{
