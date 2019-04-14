@@ -6,7 +6,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 //Set morgan up
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 
 // Creates a public route for access to documents in the "public" folder
 app.use(express.static(path.join(__dirname, "public")));
