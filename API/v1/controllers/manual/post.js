@@ -54,7 +54,7 @@ const manualModel = require("../../models/manual");
  *                              - "gps"
  *                              - "control de acceso"
  *          responses:
- *                  '200':
+ *                  '201':
  *                      description: Manual record added
  *                  '401':
  *                      description: Your lack of permissions prevents you from accessing this route

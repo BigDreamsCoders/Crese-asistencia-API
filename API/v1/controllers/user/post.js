@@ -37,7 +37,7 @@ const jwt = require("jsonwebtoken");
  *                  name: adminSecret
  *                  description: "The secret password to create admins"
  *          responses:
- *                  '200':
+ *                  '201':
  *                      description: User record/s added
  *                  '422':
  *                      description: User couldn't be created
@@ -73,7 +73,7 @@ exports.insertUser= (req, res, next) => {
                 const userBody = {
                     account: req.body.account,
                     email: req.body.email,
-                    password: hash,
+                    password: hash
                 };
                 const newUser = new userModel(userBody);
                 newUser.save()

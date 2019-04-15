@@ -54,7 +54,7 @@ const videoModel = require("../../models/video");
  *                              - "gps"
  *                              - "control de acceso"
  *          responses:
- *                  '200':
+ *                  '201':
  *                      description: Video record added
  *                  '401':
  *                      description: Your lack of permissions prevents you from accessing this route
