@@ -34,6 +34,11 @@ const userModel = require("../../models/user");
 
 exports.deleteUser = (req, res, next)=>{
     const pathId = req.params.idUser;
+    if(!pathId){
+        return res.status(422).json({
+            message: "Missing fields"
+        });
+    }
     userModel.find({_id: pathId}).exec()
         .then(result =>{
             if(result){

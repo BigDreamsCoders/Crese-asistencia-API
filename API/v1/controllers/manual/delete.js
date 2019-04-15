@@ -34,6 +34,11 @@ const manualModel = require("../../models/manual");
 
 exports.deleteManual = (req, res, next)=>{
     const pathId = req.params.idManual;
+    if(!pathId){
+        return res.status(422).json({
+            message: "Missing fields"
+        });
+    }
     manualModel.find({_id: pathId}).exec()
         .then(result =>{
             if(result){

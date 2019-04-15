@@ -34,6 +34,11 @@ const videoModel = require("../../models/video");
 
 exports.deleteVideo = (req, res, next)=>{
     const pathId = req.params.idVideo;
+    if(!pathId){
+        return res.status(422).json({
+            message: "Missing fields"
+        });
+    }
     videoModel.find({_id: pathId}).exec()
         .then(result =>{
             if(result){
