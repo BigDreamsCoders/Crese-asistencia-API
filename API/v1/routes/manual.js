@@ -4,6 +4,7 @@ const actionsGET = require("../controllers/manual/get");
 const actionsPOST = require("../controllers/manual/post");
 const actionsDELETE = require("../controllers/manual/delete");
 
+
 //Middleware Calls
 const vToken = require("../middleware/verifyToken");
 const vPermission = require("../middleware/verifyPermission");
@@ -23,6 +24,7 @@ router.get("/",  actionsGET.getManuals);
 router.post("/", actionsPOST.insertManual);
 //DELETE routes
 router.delete("/:idManual", actionsDELETE.deleteManual);
+
 
 
 module.exports = router;
