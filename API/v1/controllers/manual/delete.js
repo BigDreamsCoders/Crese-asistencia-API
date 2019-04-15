@@ -34,10 +34,15 @@ const manualModel = require("../../models/manual");
 
 exports.deleteManual = (req, res, next)=>{
     const pathId = req.params.idManual;
-    manualModel.find({_id: pathId}).exec()
+    if(!pathId){
+        return res.status(422).json({
+            message: "Missing fields"
+        });
+    }
+    manualModel.findOne({_id: pathId}).exec()
         .then(result =>{
             if(result){
-                manualModel.remove({_id: pathId}).exec()
+                manualModel.deleteOne({_id: pathId}).exec()
                     .then(removeResult=>{
                         return res.status(200).json({message:"Manual record deleted"});
                     }).catch(err => {

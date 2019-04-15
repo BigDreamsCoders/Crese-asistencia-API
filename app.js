@@ -14,6 +14,8 @@ app.use(express.static(path.join(__dirname, "public")));
 //Routes used in the API
 const swaggerRoutes = require("./API/v1/routes/swagger");
 const userRoutes = require("./API/v1/routes/user");
+const manualRoutes = require("./API/v1/routes/manual");
+const videoRoutes = require("./API/v1/routes/video");
 
 //Connection to database
 mongoose.connect(
@@ -59,5 +61,8 @@ app.use((req,res,next)=>{
 // Active endpoints for the API
 app.use("/API/v1/swagger", swaggerRoutes);
 app.use("/API/v1/user", userRoutes);
+app.use("/API/v1/manual", manualRoutes);
+app.use("/API/v1/video", videoRoutes);
+
 
 module.exports = app;

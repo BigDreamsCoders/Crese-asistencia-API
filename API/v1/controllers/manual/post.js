@@ -69,7 +69,7 @@ exports.insertManual= (req, res, next) => {
         !req.body.dateCreated || !req.body.keywords || !req.body.category){
         return res.status(422).json({
             message: "Missing fields"
-        })
+        });
     }
     const manualBody = {
         name : doc.name,
@@ -83,7 +83,7 @@ exports.insertManual= (req, res, next) => {
         .then((result) =>{
             return res.status(201).json({
                 userData: newManual,
-                message: "Manaul record created"
+                message: "Manual record created"
             })
         }).catch(err =>{
             return res.status(500).json({

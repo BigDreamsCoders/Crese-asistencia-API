@@ -37,6 +37,10 @@ const shortid = require("shortid");
  *                  - "cctv"
  *                  - "gps"
  *                  - "control de acceso"
+ *              reachFactor:
+ *                  type: integer
+ *                  description: "How many times has the video been opened through the app"
+ *                  example: 102
  *              viewFactor:
  *                  type: integer
  *                  description: "How many times has the video been clicked"
@@ -58,6 +62,7 @@ const videoSchema = mongoose.Schema({
     dateCreated: {type: String, require: true},
     keywords: [{type: String}],
     category: {type: String, require: true},
+    reachFactor: {type: String, default: 0},
     viewFactor: {type: Number, default: 0},
     shareFactor: {type: Number, default: 0}
 });

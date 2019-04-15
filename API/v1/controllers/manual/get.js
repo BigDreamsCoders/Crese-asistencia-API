@@ -35,6 +35,11 @@ const manualModel = require("../../models/manual");
  */
 
 exports.getManuals = (req,res,next) =>{
+    if(!req.body.search || !req.body.category){
+        return res.status(422).json({
+            message: "Missing fields"
+        });
+    }
     const search = "/"+req.body.search+"/";
     const categorySearch = req.body.category;
     manualModel.find({$or:[{keywords: {$regex: search}},{name: {$regex: search}}]},
