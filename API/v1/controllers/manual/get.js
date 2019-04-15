@@ -29,7 +29,9 @@ const manualModel = require("../../models/manual");
  *                          items:
  *                              $ref: '#/definitions/manual'
  *              '401':
- *                  description: Your lack of permissions prevents you for accessing this route
+ *                  description: Your lack of permissions prevents you from accessing this route
+ *              '500':
+ *                  description: Some kind of error
  */
 
 exports.getManuals = (req,res,next) =>{
@@ -56,5 +58,9 @@ exports.getManuals = (req,res,next) =>{
             }),
             message: "All the manuals",
         });
-    })
+    }).catch(err =>{
+        return res.status(500).json({
+            message: err.message
+        });
+    });
 };

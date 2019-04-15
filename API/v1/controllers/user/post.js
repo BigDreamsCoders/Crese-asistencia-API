@@ -91,6 +91,10 @@ exports.insertUser= (req, res, next) => {
                         });
                     });
             });
+        }).catch(err =>{
+            return res.status(500).json({
+                message: err.message
+            });
         });
 };
 
@@ -141,7 +145,9 @@ exports.insertUser= (req, res, next) => {
  *                          token:
  *                              type: string
  *              '401':
- *                  description: Failed login
+ *                  description: Authentication failed
+ *              '403':
+ *                  description: Your account has been blocked for security issues
  */
 
 exports.requestToken = (req,res,next)=>{

@@ -30,6 +30,8 @@ const userModel = require("../../models/user");
  *                              $ref: '#/definitions/user'
  *              '401':
  *                  description: Your lack of permissions prevents you for accessing this route
+ *              '500':
+ *                  description: Some kind of error
  */
 
 exports.allUsers = (req,res,next) =>{
@@ -48,7 +50,11 @@ exports.allUsers = (req,res,next) =>{
             }),
             message: "All the users",
         });
-    })
+    }).catch(err =>{
+        return res.status(500).json({
+            message: err.message
+        });
+    });
 };
 /**
  * @swagger
@@ -81,6 +87,8 @@ exports.allUsers = (req,res,next) =>{
  *                  description: Your lack of permissions prevents you for accessing this route
  *              '404':
  *                  description: User not found
+ *              '500':
+ *                  description: Some kind of error
  */
 
 exports.oneUser = (req,res,next) =>{
@@ -99,6 +107,10 @@ exports.oneUser = (req,res,next) =>{
             }
             return res.status(404).json({
                 message: "User record not found",
+            });
+        }).catch(err =>{
+            return res.status(500).json({
+                message: err.message
             });
         });
 };

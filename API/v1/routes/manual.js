@@ -17,7 +17,7 @@ const vPermission = require("../middleware/verifyPermission");
  */
 
 //GET routes
-router.get("/",  actionsGET.allUsers);
+router.get("/",  actionsGET.getManuals);
 
 
 

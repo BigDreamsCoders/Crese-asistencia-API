@@ -56,57 +56,38 @@ const manualModel = require("../../models/manual");
  *          responses:
  *                  '200':
  *                      description: Manual record added
+ *                  '401':
+ *                      description: Your lack of permissions prevents you from accessing this route
  *                  '422':
- *                      description: Manual couldn't be added
+ *                      description: Manual couldn't be created
  *                  '500':
  *                      description: Some kind of error
  */
 
-exports.insertUser= (req, res, next) => {
-    //Verify if a user exists with the same email and name
-    if(!req.body.account || !req.body.email || !req.body.password){
+exports.insertManual= (req, res, next) => {
+    if(!req.body.name || !req.body.URL || !req.body.sourceType ||
+        !req.body.dateCreated || !req.body.keywords || !req.body.category){
         return res.status(422).json({
             message: "Missing fields"
         })
     }
-    userModel.find({$or: [
-        {email: req.body.email},
-        {account:  req.body.account}
-    ]})
-        .exec()
-        .then(user =>{
-            //One user already has a email or account in use
-            if(user.length>= 1){
-                return res.status(422).json({
-                    message: "Credentials in use",
-                });
-            }
-            bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err,hash)=>{
-                if(err){
-                    return res.status(500).json({
-                        message: err.message
-                    });
-                }
-                const userBody = {
-                    account: req.body.account,
-                    email: req.body.email,
-                    password: hash,
-                };
-                const newUser = new userModel(userBody);
-                newUser.save()
-                    .then((result) =>{
-                        return res.status(201).json({
-                            userData: newUser,
-                            message: "User record created"
-                        })
-                    }).catch(err =>{
-                        /*res.status(422).json({
-                            message: "Record had a conflict",
-                        });*/
-                        return res.status(500).json({
-                            message: err.message
-                        });
-                    });
+    const manualBody = {
+        name : doc.name,
+        URL: doc.URL,
+        sourceType : doc.sourceType,
+        keywords : doc.keywords,
+        category: doc.category
+    };
+    const newManual = new manualModel(manualBody);
+    newManual.save()
+        .then((result) =>{
+            return res.status(201).json({
+                userData: newManual,
+                message: "Manaul record created"
+            })
+        }).catch(err =>{
+            return res.status(500).json({
+                message: err.message
             });
         });
 };

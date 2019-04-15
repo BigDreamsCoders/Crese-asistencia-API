@@ -7,7 +7,7 @@ const manualModel = require("../../models/manual");
  *      delete:
  *          tags:
  *          - manual
- *          summary: Deletes a single record of a user
+ *          summary: Deletes a single record of a manual
  *          produces:
  *          - "application/json"
  *          parameters:
@@ -25,12 +25,14 @@ const manualModel = require("../../models/manual");
  *              '200':
  *                  description: Manual record deleted
  *              '401':
- *                  description: Your lack of permissions prevents you for accessing this route
+ *                  description: Your lack of permissions prevents you from accessing this route
  *              '404':
  *                  description: Manual not found
+ *              '500':
+ *                  description: Some kind of error
  */
 
-exports.deleteUser = (req, res, next)=>{
+exports.deleteManual = (req, res, next)=>{
     const pathId = req.params.idManual;
     manualModel.find({_id: pathId}).exec()
         .then(result =>{
@@ -43,7 +45,9 @@ exports.deleteUser = (req, res, next)=>{
                     });
             }
             return res.status(404).json({message: "Manual record not found"});
-        }).catch(err => {
-            return res.status(500).json(err);
+        }).catch(err =>{
+            return res.status(500).json({
+                message: err.message
+            });
         });
 };

@@ -1,13 +1,13 @@
-const userModel = require("../../models/user");
+const videoModel = require("../../models/video");
 
 /**
  * @swagger
  * paths:
- *  /user/{idUser}:
+ *  /video/{idVideo}:
  *      delete:
  *          tags:
- *          - user
- *          summary: Deletes a single record of a user
+ *          - video
+ *          summary: Deletes a single record of a video
  *          produces:
  *          - "application/json"
  *          parameters:
@@ -16,35 +16,35 @@ const userModel = require("../../models/user");
  *              description: Authorization token format must be the following 'Bearer **********'
  *              required: true
  *              type: string
- *            - name: idUser
+ *            - name: idVideo
  *              in: path
  *              require: true
- *              description: Unique identifier of the user to delete
+ *              description: Unique identifier of the video to delete
  *              type: string
  *          responses:
  *              '200':
- *                  description: User record deleted
+ *                  description: Video record deleted
  *              '401':
- *                  description: Your lack of permissions prevents you for accessing this route
+ *                  description: Your lack of permissions prevents you from accessing this route
  *              '404':
- *                  description: User not found
+ *                  description: Video not found
  *              '500':
  *                  description: Some kind of error
  */
 
-exports.deleteUser = (req, res, next)=>{
-    const pathId = req.params.idUser;
-    userModel.find({_id: pathId}).exec()
+exports.deleteVideo = (req, res, next)=>{
+    const pathId = req.params.idVideo;
+    videoModel.find({_id: pathId}).exec()
         .then(result =>{
             if(result){
-                userModel.remove({_id: pathId}).exec()
+                videoModel.remove({_id: pathId}).exec()
                     .then(removeResult=>{
-                        return res.status(200).json({message:"User record deleted"});
+                        return res.status(200).json({message:"Video record deleted"});
                     }).catch(err => {
                         return res.status(500).json(err);
                     });
             }
-            return res.status(404).json({message: "User record not found"});
+            return res.status(404).json({message: "Video record not found"});
         }).catch(err =>{
             return res.status(500).json({
                 message: err.message
