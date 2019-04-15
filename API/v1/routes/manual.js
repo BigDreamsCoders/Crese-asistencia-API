@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const actionsGET = require("../controllers/manual/get");
-
+const actionsPOST = require("../controllers/manual/post");
+const actionsDELETE = require("../controllers/manual/delete");
 
 //Middleware Calls
 const vToken = require("../middleware/verifyToken");
@@ -18,7 +19,10 @@ const vPermission = require("../middleware/verifyPermission");
 
 //GET routes
 router.get("/",  actionsGET.getManuals);
-
+//POST routes
+router.post("/", actionsPOST.insertManual);
+//DELETE routes
+router.delete("/", actionsDELETE.deleteManual);
 
 
 module.exports = router;

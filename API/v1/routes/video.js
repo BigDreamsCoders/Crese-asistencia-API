@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const actionsGET = require("../controllers/video/get");
+const actionsPOST = require("../controllers/video/post");
+const actionsDELETE = require("../controllers/video/delete");
+
 
 
 //Middleware Calls
@@ -18,6 +21,10 @@ const vPermission = require("../middleware/verifyPermission");
 
 //GET routes
 router.get("/",  actionsGET.getVideos);
+//POST routes
+router.post("/", actionsPOST.insertVideo);
+//DELETE routes
+router.delete("/", actionsDELETE.deleteVideo);
 
 
 
