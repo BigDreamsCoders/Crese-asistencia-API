@@ -7,6 +7,14 @@ module.exports = roles = [{
             id : "user",
             permissions: ["create", "read", "update", "delete"]
         },
+        {
+            id : "manual",
+            permissions: ["create", "read", "update", "delete"]
+        },
+        {
+            id : "video",
+            permissions: ["create", "read", "update", "delete"]
+        },
     ]
 },
 {
@@ -15,6 +23,14 @@ module.exports = roles = [{
     resource : [
         {
             id : "user",
+            permissions: ["read"]
+        },
+        {
+            id : "manual",
+            permissions: ["read"]
+        },
+        {
+            id : "video",
             permissions: ["read"]
         },
     ]

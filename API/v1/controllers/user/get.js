@@ -13,12 +13,12 @@ const userModel = require("../../models/user");
  *          parameters:
  *            - name: Authorization
  *              in: header
- *              description: The authorization must follow the format 'Bearer ****'
+ *              description: Authorization token format must be the following 'Bearer **********'
  *              required: true
  *              type: string
  *          responses:
  *              '200':
- *               description: Shows all the users information
+ *               description: Shows all the users recorded in the database
  *               schema:
  *                  type: object
  *                  properties:
@@ -29,7 +29,9 @@ const userModel = require("../../models/user");
  *                          items:
  *                              $ref: '#/definitions/user'
  *              '401':
- *                  description: You lack the credentials to do this action
+ *                  description: Your lack of permissions prevents you for accessing this route
+ *              '500':
+ *                  description: Some kind of error
  */
 
 exports.allUsers = (req,res,next) =>{
@@ -48,7 +50,11 @@ exports.allUsers = (req,res,next) =>{
             }),
             message: "All the users",
         });
-    })
+    }).catch(err =>{
+        return res.status(500).json({
+            message: err.message
+        });
+    });
 };
 /**
  * @swagger
@@ -57,19 +63,19 @@ exports.allUsers = (req,res,next) =>{
  *      get:
  *          tags:
  *          - user
- *          summary: Shows the information of single user in the DB
+ *          summary: Shows the personal information of a single user in the database
  *          produces:
  *          - "application/json"
  *          parameters:
  *            - name: Authorization
  *              in: header
- *              description: The authorization must follow the format 'Bearer ****'
+ *              description: Authorization token format must be the following 'Bearer **********'
  *              required: true
  *              type: string
  *            - name: idUser
  *              in: path
- *              description: Id of the user to find
  *              require: true
+ *              description: Unique identifier of the user to find
  *              type: string
  *          responses:
  *              '200':
@@ -78,9 +84,11 @@ exports.allUsers = (req,res,next) =>{
  *                  type: object
  *                  $ref: '#/definitions/user'
  *              '401':
- *                  description: You lack the credentials to do this action
+ *                  description: Your lack of permissions prevents you for accessing this route
  *              '404':
  *                  description: User not found
+ *              '500':
+ *                  description: Some kind of error
  */
 
 exports.oneUser = (req,res,next) =>{
@@ -99,6 +107,10 @@ exports.oneUser = (req,res,next) =>{
             }
             return res.status(404).json({
                 message: "User record not found",
+            });
+        }).catch(err =>{
+            return res.status(500).json({
+                message: err.message
             });
         });
 };

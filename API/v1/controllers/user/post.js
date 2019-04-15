@@ -15,31 +15,34 @@ const jwt = require("jsonwebtoken");
  *          - "application/json"
  *          parameters:
  *              -   in: body
- *                  name: user
- *                  description: "The user information of the account"
+ *                  name: User structure
+ *                  description: User information to inserted in the database
  *                  required: true
  *                  schema:
  *                      type: object
  *                      properties:
  *                          email:
  *                              type: string
- *                              description: "The user email address"
+ *                              description: The user email address
+ *                              example: 00062816@uca.edu.sv
  *                          passsword:
- *                              type: string
- *                              description: "The personal secret string"
+ *                              type: password
+ *                              description: The personal secret string
+ *                              example: bigSecret
  *                          account:
  *                              type: string
- *                              description: "Nickname, the way it will be refered"
+ *                              description: Nickname, the way it will be refered
+ *                              example: AlexBig
  *              -   in: path
- *                  name: secretString
+ *                  name: adminSecret
  *                  description: "The secret password to create admins"
  *          responses:
  *                  '200':
- *                      description: "User record/s added"
+ *                      description: User record/s added
  *                  '422':
- *                      description: "User couldn't be added"
+ *                      description: User couldn't be created
  *                  '500':
- *                      description: "Some kind of error"
+ *                      description: Some kind of error
  */
 
 exports.insertUser= (req, res, next) => {
@@ -88,6 +91,10 @@ exports.insertUser= (req, res, next) => {
                         });
                     });
             });
+        }).catch(err =>{
+            return res.status(500).json({
+                message: err.message
+            });
         });
 };
 
@@ -99,13 +106,13 @@ exports.insertUser= (req, res, next) => {
  *      post:
  *          tags:
  *          - user
- *          summary: Return a token with the user information
+ *          summary: Verifies a user identity to return a token
  *          produces:
  *          - "application/json"
  *          parameters:
- *            - name: emailLogin
+ *            - name: Email Login
  *              in: body
- *              description: information for the login to work
+ *              description: Login method making use of the email address
  *              required: true
  *              schema:
  *                  type: object
@@ -115,10 +122,10 @@ exports.insertUser= (req, res, next) => {
  *                          example: 00062816@uca.edu.sv
  *                      password:
  *                          type: string
- *                          example: 'bigSecret'
- *            - name: accountLogin
+ *                          example: bigSecret
+ *            - name: Account Login
  *              in: body
- *              description: information for the login to work
+ *              description: Login method using the account identifier
  *              required: true
  *              schema:
  *                  type: object
@@ -128,7 +135,7 @@ exports.insertUser= (req, res, next) => {
  *                          example: AlexBig
  *                      password:
  *                          type: string
- *                          example: 'bigSecret'
+ *                          example: bigSecret
  *          responses:
  *              '200':
  *                  description: It will return a object with information
@@ -138,7 +145,9 @@ exports.insertUser= (req, res, next) => {
  *                          token:
  *                              type: string
  *              '401':
- *                  description: Failed login
+ *                  description: Authentication failed
+ *              '403':
+ *                  description: Your account has been blocked for security issues
  */
 
 exports.requestToken = (req,res,next)=>{
