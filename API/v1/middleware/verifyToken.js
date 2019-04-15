@@ -13,4 +13,3 @@ module.exports = (req,res,next) =>{
         res.status(401).json({message: "Not verified users, please login and add the token"});
     }
 };
-
