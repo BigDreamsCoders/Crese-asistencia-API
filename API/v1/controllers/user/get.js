@@ -29,7 +29,7 @@ const userModel = require("../../models/user");
  *                          items:
  *                              $ref: '#/definitions/user'
  *              '401':
- *                  description: Your lack of permissions prevents you for accessing this route
+ *                  description: Your lack of permissions prevents you from accessing this route
  *              '500':
  *                  description: Some kind of error
  */
@@ -84,7 +84,7 @@ exports.allUsers = (req,res,next) =>{
  *                  type: object
  *                  $ref: '#/definitions/user'
  *              '401':
- *                  description: Your lack of permissions prevents you for accessing this route
+ *                  description: Your lack of permissions prevents you from accessing this route
  *              '404':
  *                  description: User not found
  *              '500':
