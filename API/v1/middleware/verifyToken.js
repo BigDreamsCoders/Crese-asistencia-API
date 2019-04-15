@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const modelRoles = require("../models/roleConfig");
+
 
 //Verify the token and request data from it
 module.exports = (req,res,next) =>{
@@ -13,3 +13,4 @@ module.exports = (req,res,next) =>{
         res.status(401).json({message: "Not verified users, please login and add the token"});
     }
 };
+
