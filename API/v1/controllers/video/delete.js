@@ -39,10 +39,10 @@ exports.deleteVideo = (req, res, next)=>{
             message: "Missing fields"
         });
     }
-    videoModel.find({_id: pathId}).exec()
+    videoModel.findOne({_id: pathId}).exec()
         .then(result =>{
             if(result){
-                videoModel.remove({_id: pathId}).exec()
+                videoModel.deleteOne({_id: pathId}).exec()
                     .then(removeResult=>{
                         return res.status(200).json({message:"Video record deleted"});
                     }).catch(err => {

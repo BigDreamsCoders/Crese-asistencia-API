@@ -39,10 +39,10 @@ exports.deleteUser = (req, res, next)=>{
             message: "Missing fields"
         });
     }
-    userModel.find({_id: pathId}).exec()
+    userModel.findOne({_id: pathId}).exec()
         .then(result =>{
             if(result){
-                userModel.remove({_id: pathId}).exec()
+                userModel.deleteOne({_id: pathId}).exec()
                     .then(removeResult=>{
                         return res.status(200).json({message:"User record deleted"});
                     }).catch(err => {

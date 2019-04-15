@@ -22,7 +22,7 @@ router.get("/",  actionsGET.getManuals);
 //POST routes
 router.post("/", actionsPOST.insertManual);
 //DELETE routes
-router.delete("/", actionsDELETE.deleteManual);
+router.delete("/:idManual", actionsDELETE.deleteManual);
 
 
 module.exports = router;

@@ -39,10 +39,10 @@ exports.deleteManual = (req, res, next)=>{
             message: "Missing fields"
         });
     }
-    manualModel.find({_id: pathId}).exec()
+    manualModel.findOne({_id: pathId}).exec()
         .then(result =>{
             if(result){
-                manualModel.remove({_id: pathId}).exec()
+                manualModel.deleteOne({_id: pathId}).exec()
                     .then(removeResult=>{
                         return res.status(200).json({message:"Manual record deleted"});
                     }).catch(err => {

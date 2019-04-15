@@ -24,7 +24,7 @@ router.get("/",  actionsGET.getVideos);
 //POST routes
 router.post("/", actionsPOST.insertVideo);
 //DELETE routes
-router.delete("/", actionsDELETE.deleteVideo);
+router.delete("/:idVideo", actionsDELETE.deleteVideo);
 
 
 
