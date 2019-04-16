@@ -22,6 +22,7 @@ router.get("/", vToken, vPermission("read", "user"),  actionsGET.allUsers);
 router.get("/:idUser", vToken, vPermission("read", "user"),   actionsGET.oneUser);
 //POST routes
 router.post("/", actionsPOST.insertUser);
+router.post("/admin", vToken, vPermission("create", "admin"), actionsPOST.insertAdmin);
 router.post("/login", actionsPOST.requestToken);
 //DELETE routes
 router.delete("/:idUser", vToken, vPermission("delete", "user"),  actionsDELETE.deleteUser);

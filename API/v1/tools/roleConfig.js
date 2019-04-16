@@ -44,10 +44,6 @@ module.exports = roles = [
         description: "The main consumer of the app",
         resource : [
             {
-                id : "user",
-                permissions: ["read"]
-            },
-            {
                 id : "manual",
                 permissions: ["read"]
             },
