@@ -54,7 +54,7 @@ const manualModel = require("../../models/manual");
  *                              - "gps"
  *                              - "control de acceso"
  *          responses:
- *                  '200':
+ *                  '201':
  *                      description: Manual record added
  *                  '401':
  *                      description: Your lack of permissions prevents you from accessing this route
@@ -76,7 +76,8 @@ exports.insertManual= (req, res, next) => {
         URL: doc.URL,
         sourceType : doc.sourceType,
         keywords : doc.keywords,
-        category: doc.category
+        category: doc.category,
+        creator: req.userData._id
     };
     const newManual = new manualModel(manualBody);
     newManual.save()

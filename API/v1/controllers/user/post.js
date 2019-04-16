@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
  *      post:
  *          tags:
  *          - user
- *          summary: Creates a user in the database
+ *          summary: Creates an user in the database
  *          produces:
  *          - "application/json"
  *          parameters:
@@ -37,7 +37,7 @@ const jwt = require("jsonwebtoken");
  *                  name: adminSecret
  *                  description: "The secret password to create admins"
  *          responses:
- *                  '200':
+ *                  '201':
  *                      description: User record/s added
  *                  '422':
  *                      description: User couldn't be created
@@ -73,7 +73,7 @@ exports.insertUser= (req, res, next) => {
                 const userBody = {
                     account: req.body.account,
                     email: req.body.email,
-                    password: hash,
+                    password: hash
                 };
                 const newUser = new userModel(userBody);
                 newUser.save()
@@ -98,6 +98,108 @@ exports.insertUser= (req, res, next) => {
         });
 };
 
+/**
+ * @swagger
+ * paths:
+ *  /user/admin:
+ *      post:
+ *          tags:
+ *          - user
+ *          summary: Creates an admin user in the database
+ *          produces:
+ *          - "application/json"
+ *          parameters:
+ *              -   in: header
+ *                  name: Authorization
+ *                  description: Authorization token format must be the following 'Bearer **********'
+ *                  required: true
+ *                  type: string
+ *              -   in: body
+ *                  name: User structure
+ *                  description: User information to inserted in the database
+ *                  required: true
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          email:
+ *                              type: string
+ *                              description: The user email address
+ *                              example: 00062816@uca.edu.sv
+ *                          passsword:
+ *                              type: password
+ *                              description: The personal secret string
+ *                              example: bigSecret
+ *                          account:
+ *                              type: string
+ *                              description: Nickname, the way it will be refered
+ *                              example: AlexBig
+ *              -   in: path
+ *                  name: adminSecret
+ *                  description: "The secret password to create admins"
+ *          responses:
+ *                  '201':
+ *                      description: User record/s added
+ *                  '401':
+ *                      description: Your lack of permissions prevents you from accessing this route
+ *                  '422':
+ *                      description: User couldn't be created
+ *                  '500':
+ *                      description: Some kind of error
+ */
+
+exports.insertAdmin= (req, res, next) => {
+    //Verify if a user exists with the same email and name
+    if(!req.body.account || !req.body.email || !req.body.password){
+        return res.status(422).json({
+            message: "Missing fields"
+        })
+    }
+    userModel.find({$or: [
+        {email: req.body.email},
+        {account:  req.body.account}
+    ]})
+        .exec()
+        .then(user =>{
+            //One user already has a email or account in use
+            if(user.length>= 1){
+                return res.status(422).json({
+                    message: "Credentials in use",
+                });
+            }
+            bcrypt.hash(req.body.password, parseInt(process.env.SALT_ROUNDS), (err,hash)=>{
+                if(err){
+                    return res.status(500).json({
+                        message: err.message
+                    });
+                }
+                const userBody = {
+                    account: req.body.account,
+                    email: req.body.email,
+                    password: hash,
+                    roles: "admin"
+                };
+                const newUser = new userModel(userBody);
+                newUser.save()
+                    .then((result) =>{
+                        return res.status(201).json({
+                            userData: newUser,
+                            message: "User record created"
+                        })
+                    }).catch(err =>{
+                        /*res.status(422).json({
+                            message: "Record had a conflict",
+                        });*/
+                        return res.status(500).json({
+                            message: err.message
+                        });
+                    });
+            });
+        }).catch(err =>{
+            return res.status(500).json({
+                message: err.message
+            });
+        });
+};
 
 /**
  * @swagger

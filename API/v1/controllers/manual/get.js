@@ -44,10 +44,10 @@ exports.getManuals = (req,res,next) =>{
     const categorySearch = req.body.category;
     manualModel.find({$or:[{keywords: {$regex: search}},{name: {$regex: search}}]},
         {category: categorySearch}).then(docs=>{
+        // Specifies the way the manuals will be presented and what information will be given
         return res.status(200).json({
             count: docs.length,
             manuals: docs.map(doc =>{
-                // Specifies the way the manuals will be presented and what information will be given
                 return{
                     _id : doc._id,
                     name : doc.name,

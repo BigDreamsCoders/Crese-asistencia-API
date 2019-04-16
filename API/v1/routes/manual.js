@@ -19,11 +19,11 @@ const vPermission = require("../middleware/verifyPermission");
  */
 
 //GET routes
-router.get("/",  actionsGET.getManuals);
+router.get("/", vToken, vPermission("read", "manual"),  actionsGET.getManuals);
 //POST routes
-router.post("/", actionsPOST.insertManual);
+router.post("/", vToken, vPermission("create", "manual"), actionsPOST.insertManual);
 //DELETE routes
-router.delete("/:idManual", actionsDELETE.deleteManual);
+router.delete("/:idManual", vToken, vPermission("delete", "manual"), actionsDELETE.deleteManual);
 
 
 

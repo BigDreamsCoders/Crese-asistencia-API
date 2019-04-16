@@ -54,7 +54,7 @@ const videoModel = require("../../models/video");
  *                              - "gps"
  *                              - "control de acceso"
  *          responses:
- *                  '200':
+ *                  '201':
  *                      description: Video record added
  *                  '401':
  *                      description: Your lack of permissions prevents you from accessing this route
@@ -69,14 +69,15 @@ exports.insertVideo= (req, res, next) => {
         !req.body.dateCreated || !req.body.keywords || !req.body.category){
         return res.status(422).json({
             message: "Missing fields"
-        })
+        });
     }
     const videoBody = {
         name : doc.name,
         URL: doc.URL,
         sourceType : doc.sourceType,
         keywords : doc.keywords,
-        category: doc.category
+        category: doc.category,
+        creator: req.userData._id
     };
     const newVideo = new videoModel(videoBody);
     newVideo.save()
