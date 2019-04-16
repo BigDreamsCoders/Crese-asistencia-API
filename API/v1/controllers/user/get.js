@@ -43,9 +43,10 @@ exports.allUsers = (req,res,next) =>{
                 return{
                     _id : doc._id,
                     account : doc.account,
+                    email: doc.email,
+                    roles : doc.roles,
                     dateCreated : doc.dateCreated,
-                    status : doc.status,
-                    authorithy : doc.authorithy
+                    status : doc.status
                 }
             }),
             message: "All the users",

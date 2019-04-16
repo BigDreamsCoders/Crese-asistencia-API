@@ -44,10 +44,10 @@ exports.getVideos = (req,res,next) =>{
     const categorySearch = req.body.category;
     videoModel.find({$or:[{keywords: {$regex: search}},{name: {$regex: search}}]},
         {category: categorySearch}).then(docs=>{
+        // Specifies the way the videos will be presented and what information will be given
         return res.status(200).json({
             count: docs.length,
             videos: docs.map(doc =>{
-                // Specifies the way the videos will be presented and what information will be given
                 return{
                     _id : doc._id,
                     name : doc.name,

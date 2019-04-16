@@ -49,6 +49,10 @@ const shortid = require("shortid");
  *                  type: integer
  *                  description: "How many times has the manual been shared"
  *                  example: 20
+ *              creator:
+ *                  type: string
+ *                  description: "The identifier of the user that made this document"
+ *                  example: NKZBlvbHP
  */
 
 const manualSchema = mongoose.Schema({
@@ -64,7 +68,8 @@ const manualSchema = mongoose.Schema({
     category: {type: String, require: true},
     downloadFactor: {type: Number, default: 0},
     viewFactor: {type: Number, default: 0},
-    shareFactor: {type: Number, default: 0}
+    shareFactor: {type: Number, default: 0},
+    creator: { type: String, ref: "user"}
 });
 
 module.exports = mongoose.model("manual", manualSchema);

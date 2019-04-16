@@ -42,11 +42,11 @@ exports.deleteManual = (req, res, next)=>{
     manualModel.findOne({_id: pathId}).exec()
         .then(result =>{
             if(result){
-                manualModel.deleteOne({_id: pathId}).exec()
+                return manualModel.deleteOne({_id: pathId}).exec()
                     .then(removeResult=>{
-                        return res.status(200).json({message:"Manual record deleted"});
+                        res.status(200).json({message:"Manual record deleted"});
                     }).catch(err => {
-                        return res.status(500).json(err);
+                        res.status(500).json(err);
                     });
             }
             return res.status(404).json({message: "Manual record not found"});

@@ -42,11 +42,11 @@ exports.deleteVideo = (req, res, next)=>{
     videoModel.findOne({_id: pathId}).exec()
         .then(result =>{
             if(result){
-                videoModel.deleteOne({_id: pathId}).exec()
+                return videoModel.deleteOne({_id: pathId}).exec()
                     .then(removeResult=>{
-                        return res.status(200).json({message:"Video record deleted"});
+                        res.status(200).json({message:"Video record deleted"});
                     }).catch(err => {
-                        return res.status(500).json(err);
+                        res.status(500).json(err);
                     });
             }
             return res.status(404).json({message: "Video record not found"});

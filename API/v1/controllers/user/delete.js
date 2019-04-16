@@ -41,12 +41,15 @@ exports.deleteUser = (req, res, next)=>{
     }
     userModel.findOne({_id: pathId}).exec()
         .then(result =>{
-            if(result){
-                userModel.deleteOne({_id: pathId}).exec()
+            if(result.roles=="superadmin"){
+                return res.status(500).json({message: "Excluded from this function"})
+            }
+            if(result && result.roles!="superadmin"){
+                return userModel.deleteOne({_id: pathId}).exec()
                     .then(removeResult=>{
-                        return res.status(200).json({message:"User record deleted"});
+                        res.status(200).json({message:"User record deleted"});
                     }).catch(err => {
-                        return res.status(500).json(err);
+                        res.status(500).json(err);
                     });
             }
             return res.status(404).json({message: "User record not found"});
