@@ -24,7 +24,7 @@ router.get("/:idUser", vToken, vPermission("read", "user"),   actionsGET.oneUser
 router.post("/", actionsPOST.insertUser);
 router.post("/login", actionsPOST.requestToken);
 //DELETE routes
-router.delete("/", vToken, vPermission("delete", "user"),  actionsDELETE.deleteUser);
+router.delete("/:idUser", vToken, vPermission("delete", "user"),  actionsDELETE.deleteUser);
 
 
 module.exports = router;
