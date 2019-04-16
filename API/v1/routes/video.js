@@ -5,7 +5,6 @@ const actionsPOST = require("../controllers/video/post");
 const actionsDELETE = require("../controllers/video/delete");
 
 
-
 //Middleware Calls
 const vToken = require("../middleware/verifyToken");
 const vPermission = require("../middleware/verifyPermission");
@@ -20,11 +19,11 @@ const vPermission = require("../middleware/verifyPermission");
  */
 
 //GET routes
-router.get("/",  actionsGET.getVideos);
+router.get("/", vToken, vPermission("read", "video"),   actionsGET.getVideos);
 //POST routes
-router.post("/", actionsPOST.insertVideo);
+router.post("/", vToken, vPermission("create", "video"), actionsPOST.insertVideo);
 //DELETE routes
-router.delete("/:idVideo", actionsDELETE.deleteVideo);
+router.delete("/:idVideo", vToken, vPermission("delete", "video"), actionsDELETE.deleteVideo);
 
 
 

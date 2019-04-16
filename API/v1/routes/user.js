@@ -18,13 +18,13 @@ const vPermission = require("../middleware/verifyPermission");
  */
 
 //GET routes
-router.get("/",  actionsGET.allUsers);
-router.get("/:idUser",   actionsGET.oneUser);
+router.get("/", vToken, vPermission("read", "user"),  actionsGET.allUsers);
+router.get("/:idUser", vToken, vPermission("read", "user"),   actionsGET.oneUser);
 //POST routes
 router.post("/", actionsPOST.insertUser);
 router.post("/login", actionsPOST.requestToken);
 //DELETE routes
-router.delete("/", actionsDELETE.deleteUser);
+router.delete("/", vToken, vPermission("delete", "user"),  actionsDELETE.deleteUser);
 
 
 module.exports = router;
