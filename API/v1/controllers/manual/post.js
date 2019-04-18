@@ -72,11 +72,11 @@ exports.insertManual= (req, res, next) => {
         });
     }
     const manualBody = {
-        name : doc.name,
-        URL: doc.URL,
-        sourceType : doc.sourceType,
-        keywords : doc.keywords,
-        category: doc.category,
+        name : req.body.name,
+        URL: req.body.URL,
+        sourceType : req.body.sourceType,
+        keywords : req.body.keywords,
+        category: req.body.category,
         creator: req.userData._id
     };
     const newManual = new manualModel(manualBody);
