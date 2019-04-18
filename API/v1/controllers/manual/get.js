@@ -20,7 +20,7 @@ const manualModel = require("../../models/manual");
  *              in: query
  *              schema:
  *                  type: string
- *              description: A string of text that the manual contains, this then will be uses to search the fields: keywords and name
+ *              description: A string of text that the manual contains, this then will be uses to search the fields keywords and name
  *            - name: category
  *              in: query
  *              schema:

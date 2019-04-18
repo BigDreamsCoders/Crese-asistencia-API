@@ -20,7 +20,7 @@ const videoModel = require("../../models/video");
  *              in: query
  *              schema:
  *                  type: string
- *              description: A string of text that the video contains, this then will be used to search the fields: keywords and name
+ *              description: A string of text that the video contains, this then will be used to search the fields keywords and name
  *            - name: category
  *              in: query
  *              schema:
