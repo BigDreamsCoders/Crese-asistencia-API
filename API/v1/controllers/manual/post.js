@@ -77,7 +77,7 @@ exports.insertManual= (req, res, next) => {
         sourceType : req.body.sourceType,
         keywords : req.body.keywords,
         category: req.body.category,
-        creator: req.userData._id
+        creator: req.userData.idUser
     };
     const newManual = new manualModel(manualBody);
     newManual.save()

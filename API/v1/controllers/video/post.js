@@ -77,7 +77,7 @@ exports.insertVideo= (req, res, next) => {
         sourceType : req.body.sourceType,
         keywords : req.body.keywords,
         category: req.body.category,
-        creator: req.userData._id
+        creator: req.userData.idUser
     };
     const newVideo = new videoModel(videoBody);
     newVideo.save()
