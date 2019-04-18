@@ -3,11 +3,11 @@ const manualModel = require("../../models/manual");
 /**
  * @swagger
  * paths:
- *  /manual:
+ *  /manual?search=Samsung&category=cctv:
  *      get:
  *          tags:
  *          - manual
- *          summary: Finds all the manuals and displays them
+ *          summary: Finds manuals by its search and category
  *          produces:
  *          - "application/json"
  *          parameters:
@@ -16,6 +16,16 @@ const manualModel = require("../../models/manual");
  *              description: Authorization token format must be the following 'Bearer **********'
  *              required: true
  *              type: string
+ *            - name: search
+ *              in: query
+ *              schema:
+ *                  type: string
+ *              description: A string text that the manual main contain in its keywords or name.
+ *            - name: category
+ *              in: query
+ *              schema:
+ *                  type: string
+ *              description: Defines what category will the search
  *          responses:
  *              '200':
  *               description: Shows all the manuals recorded in the database
@@ -30,18 +40,20 @@ const manualModel = require("../../models/manual");
  *                              $ref: '#/definitions/manual'
  *              '401':
  *                  description: Your lack of permissions prevents you from accessing this route
+ *              '422':
+ *                  description: Missing fields
  *              '500':
  *                  description: Some kind of error
  */
 
 exports.getManuals = (req,res,next) =>{
-    if(!req.body.search || !req.body.category){
+    if(!req.query.search || !req.query.category){
         return res.status(422).json({
             message: "Missing fields"
         });
     }
-    const search = "/"+req.body.search+"/";
-    const categorySearch = req.body.category;
+    const search = "/"+req.query.search+"/";
+    const categorySearch = req.query.category;
     manualModel.find({$or:[{keywords: {$regex: search}},{name: {$regex: search}}]},
         {category: categorySearch}).then(docs=>{
         // Specifies the way the manuals will be presented and what information will be given

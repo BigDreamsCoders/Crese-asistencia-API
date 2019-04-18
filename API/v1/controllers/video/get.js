@@ -3,11 +3,11 @@ const videoModel = require("../../models/video");
 /**
  * @swagger
  * paths:
- *  /video:
+ *  /video?search=Samsung&category=cctv:
  *      get:
  *          tags:
  *          - video
- *          summary: Finds all the videos and displays them
+ *          summary: Find videos by its search and category
  *          produces:
  *          - "application/json"
  *          parameters:
@@ -16,6 +16,16 @@ const videoModel = require("../../models/video");
  *              description: Authorization token format must be the following 'Bearer **********'
  *              required: true
  *              type: string
+ *            - name: search
+ *              in: query
+ *              schema:
+ *                  type: string
+ *              description: A string text that the manual main contain in its keywords or name.
+ *            - name: category
+ *              in: query
+ *              schema:
+ *                  type: string
+ *              description: Defines what category will the search
  *          responses:
  *              '200':
  *               description: Shows all the videos recorded in the database
@@ -35,13 +45,13 @@ const videoModel = require("../../models/video");
  */
 
 exports.getVideos = (req,res,next) =>{
-    if(!req.body.search || !req.body.category){
+    if(!req.query.search || !req.query.category){
         return res.status(422).json({
             message: "Missing fields"
         });
     }
-    const search = "/"+req.body.search+"/";
-    const categorySearch = req.body.category;
+    const search = "/"+req.query.search+"/";
+    const categorySearch = req.query.category;
     videoModel.find({$or:[{keywords: {$regex: search}},{name: {$regex: search}}]},
         {category: categorySearch}).then(docs=>{
         // Specifies the way the videos will be presented and what information will be given
