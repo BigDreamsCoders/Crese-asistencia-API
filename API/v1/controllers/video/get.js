@@ -52,11 +52,15 @@ exports.getVideos = (req,res,next) =>{
     }
     const search = req.query.search;
     const categorySearch = req.query.category;
-    videoModel.find({$or:
-        [
-            {keywords: {$regex: `.*${search}.*`}},
-            {name: {$regex: `.*${search}.*`}},
-            {category: `${categorySearch}`}
+    videoModel.find({
+        $and:[{
+            $or:[
+                {keywords: {$regex: `.*${search}.*`}},
+                {name: {$regex: `.*${search}.*`}}
+            ]
+        },{
+            category: `${categorySearch}`
+        }
         ]
     }).then(docs=>{
         // Specifies the way the videos will be presented and what information will be given

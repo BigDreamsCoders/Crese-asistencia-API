@@ -54,11 +54,15 @@ exports.getManuals = (req,res,next) =>{
     }
     const search = req.query.search;
     const categorySearch = req.query.category;
-    manualModel.find({$or:
-        [
-            {keywords: {$regex: `.*${search}.*`}},
-            {name: {$regex: `.*${search}.*`}},
-            {category: `${categorySearch}`}
+    manualModel.find({
+        $and:[{
+            $or:[
+                {keywords: {$regex: `.*${search}.*`}},
+                {name: {$regex: `.*${search}.*`}}
+            ]
+        },{
+            category: `${categorySearch}`
+        }
         ]
     }).then(docs=>{
         // Specifies the way the manuals will be presented and what information will be given
