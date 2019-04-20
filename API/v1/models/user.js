@@ -40,7 +40,7 @@ const getDate = require("../tools/getDate");
  *                      sounds:
  *                          type: string
  *                          description: Establish if the user wants SFX in the platform
- *                      darkMode
+ *                      darkMode:
  *                          type: string
  *                          description: What color scheme it wants
  */
