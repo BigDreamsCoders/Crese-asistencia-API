@@ -31,6 +31,18 @@ const getDate = require("../tools/getDate");
  *                  type: string
  *                  description: "If it's a client or an admin"
  *                  example: "client"
+ *              settings:
+ *                  type: object
+ *                  properties:
+ *                      notifications:
+ *                          type: string
+ *                          description: If the user is going to receive notifications or not
+ *                      sounds:
+ *                          type: string
+ *                          description: Establish if the user wants SFX in the platform
+ *                      darkMode
+ *                          type: string
+ *                          description: What color scheme it wants
  */
 
 const userSchema = mongoose.Schema({
