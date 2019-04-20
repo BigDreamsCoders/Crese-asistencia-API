@@ -7,7 +7,7 @@ const swaggerDefinition = {
     info: {
         title: "Crese-asistencia API",
         version: "1.0.0",
-        description: "API diseñado con el fin de administrar una plataforma capaz de servir manuales y videos de marcas muy en específicas. También maneja un sistema de preguntas y autentificación de usuarios.",
+        description: "API designed in order to manage a platform capable of serving manuals and videos of very specific brands. It also manages a system of questions and user authentication.",
     },
     host: "https://crese-asistencia.herokuapp.com",
     basePath: "/API/v1",
