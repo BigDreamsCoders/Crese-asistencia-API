@@ -219,7 +219,7 @@ exports.insertAdmin= (req, res, next) => {
  *              schema:
  *                  type: object
  *                  properties:
- *                      emailAddress:
+ *                      email:
  *                          type: string
  *                          example: 00062816@uca.edu.sv
  *                      password:

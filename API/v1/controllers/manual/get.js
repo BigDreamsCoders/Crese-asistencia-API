@@ -34,7 +34,7 @@ const manualModel = require("../../models/manual");
  *                  properties:
  *                      count:
  *                          type: integer
- *                      manualArray:
+ *                      manuals:
  *                          type: array
  *                          items:
  *                              $ref: '#/definitions/manual'

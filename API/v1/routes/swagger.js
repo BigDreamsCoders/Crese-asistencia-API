@@ -5,11 +5,11 @@ const swaggerJSDoc = require("swagger-jsdoc");
 // General definition of a Swagger document
 const swaggerDefinition = {
     info: {
-        title: "CEII portal API",
+        title: "Crese-asistencia API",
         version: "1.0.0",
-        description: "API description for Crese-asistencia",
+        description: "API diseñado con el fin de administrar una plataforma capaz de servir manuales y videos de marcas muy en específicas. También maneja un sistema de preguntas y autentificación de usuarios.",
     },
-    host: "localhost",
+    host: "https://crese-asistencia.herokuapp.com",
     basePath: "/API/v1",
     schemes: ["https" , "http"],
     securityDefinitions:{

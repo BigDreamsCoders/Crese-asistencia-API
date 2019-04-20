@@ -25,7 +25,7 @@ const faqModel = require("../../models/faq");
  *                      count:
  *                          type: integer
  *                          example: 1
- *                      faqArray:
+ *                      faqs:
  *                          type: array
  *                          items:
  *                              type: object

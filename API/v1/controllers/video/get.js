@@ -34,7 +34,7 @@ const videoModel = require("../../models/video");
  *                  properties:
  *                      count:
  *                          type: integer
- *                      videoArray:
+ *                      videos:
  *                          type: array
  *                          items:
  *                              $ref: '#/definitions/video'

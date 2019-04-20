@@ -24,7 +24,7 @@ const userModel = require("../../models/user");
  *                  properties:
  *                      count:
  *                          type: integer
- *                      userArray:
+ *                      users:
  *                          type: array
  *                          items:
  *                              $ref: '#/definitions/user'
