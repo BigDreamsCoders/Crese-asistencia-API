@@ -18,7 +18,7 @@ const videoModel = require("../../models/video");
  *                  type: string
  *              -   in: body
  *                  name: Video Structure
- *                  description: Information of the video to be inserted in the database
+ *                  description: Object of the video to be inserted in the database
  *                  required: true
  *                  schema:
  *                      type: object

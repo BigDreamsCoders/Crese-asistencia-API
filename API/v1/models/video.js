@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const shortid = require("shortid");
+const getDate = require("../tools/getDate");
 
 /**
  *  @swagger
@@ -63,7 +64,7 @@ const videoSchema = mongoose.Schema({
     name: {type: String, require: true},
     URL: {type: String, require: true},
     sourceType: {type: String, require: true},
-    dateCreated: {type: String, require: true},
+    dateCreated: {type: String, default: getDate()},
     keywords: [{type: String}],
     category: {type: String, require: true},
     reachFactor: {type: String, default: 0},

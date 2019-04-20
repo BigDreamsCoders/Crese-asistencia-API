@@ -20,6 +20,10 @@ module.exports = roles = [
                 id : "video",
                 permissions: ["create", "read", "update", "delete"]
             },
+            {
+                id : "faq",
+                permissions: ["create", "read", "update", "delete"]
+            }
         ]
     },{
         name: "admin",
@@ -37,6 +41,10 @@ module.exports = roles = [
                 id : "video",
                 permissions: ["create", "read", "update", "delete"]
             },
+            {
+                id : "faq",
+                permissions: ["create", "read", "update", "delete"]
+            }
         ]
     },
     {
@@ -51,6 +59,10 @@ module.exports = roles = [
                 id : "video",
                 permissions: ["read"]
             },
+            {
+                id : "faq",
+                permissions: ["read"]
+            }
         ]
     }
 ];

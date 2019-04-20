@@ -30,7 +30,7 @@ const options = {
 // Initialize the Swagger document
 const swaggerSpec = swaggerJSDoc(options);
 
-// This route returns a json that the index.html of Swagger readsr
+// This route returns a json that the index.html of Swagger reads
 router.get("/json", (req, res, next)=> {
     res.setHeader("Content-Type", "application/json");
     res.status(200);

@@ -7,7 +7,7 @@ const userModel = require("../../models/user");
  *      get:
  *          tags:
  *          - user
- *          summary: Finds all the users and displays them
+ *          summary: Finds all the users and returns non-dangerous information
  *          produces:
  *          - "application/json"
  *          parameters:
@@ -46,7 +46,8 @@ exports.allUsers = (req,res,next) =>{
                     email: doc.email,
                     roles : doc.roles,
                     dateCreated : doc.dateCreated,
-                    status : doc.status
+                    status : doc.status,
+                    settings: doc.settings
                 }
             }),
             message: "All the users",

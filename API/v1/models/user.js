@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const shortid = require("shortid");
+const getDate = require("../tools/getDate");
 
 /**
  *  @swagger
@@ -40,9 +41,14 @@ const userSchema = mongoose.Schema({
     account: {type: String, require: true},
     email: {type: String, require: true},
     password: {type: String, require: true},
-    dateCreated: {type: String, require: true},
+    dateCreated: {type: String, default: getDate()},
     status: {type: Number, default: 1},
-    roles: {type: String, default:"client"}
+    roles: {type: String, default:"client"},
+    settings: {
+        notifications: {type: String, default: "enabled"},
+        sounds: {type: String, default: "enabled"},
+        darkMode: {type: String, default: "enabled"}
+    }
 });
 
 module.exports = mongoose.model("user", userSchema);

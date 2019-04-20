@@ -18,7 +18,7 @@ const manualModel = require("../../models/manual");
  *                  type: string
  *              -   in: body
  *                  name: Manual Structure
- *                  description: Manual information to inserted in the database
+ *                  description: Manual object to be inserted in the database
  *                  required: true
  *                  schema:
  *                      type: object

@@ -16,6 +16,7 @@ const swaggerRoutes = require("./API/v1/routes/swagger");
 const userRoutes = require("./API/v1/routes/user");
 const manualRoutes = require("./API/v1/routes/manual");
 const videoRoutes = require("./API/v1/routes/video");
+const faqRoutes = require("./API/v1/routes/faq");
 
 //Connection to database
 mongoose.connect(
@@ -63,6 +64,6 @@ app.use("/API/v1/swagger", swaggerRoutes);
 app.use("/API/v1/user", userRoutes);
 app.use("/API/v1/manual", manualRoutes);
 app.use("/API/v1/video", videoRoutes);
-
+app.use("/API/v1/faq", faqRoutes);
 
 module.exports = app;

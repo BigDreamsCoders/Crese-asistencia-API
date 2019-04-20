@@ -16,7 +16,7 @@ const jwt = require("jsonwebtoken");
  *          parameters:
  *              -   in: body
  *                  name: User structure
- *                  description: User information to inserted in the database
+ *                  description: User object to be inserted in the database
  *                  required: true
  *                  schema:
  *                      type: object
@@ -152,7 +152,7 @@ exports.insertAdmin= (req, res, next) => {
     if(!req.body.account || !req.body.email || !req.body.password){
         return res.status(422).json({
             message: "Missing fields"
-        })
+        });
     }
     userModel.find({$or: [
         {email: req.body.email},
