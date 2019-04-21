@@ -9,7 +9,7 @@ const swaggerDefinition = {
         version: "1.0.0",
         description: "API designed in order to manage a platform capable of serving manuals and videos of very specific brands. It also manages a system of questions and user authentication.",
     },
-    host: "https://crese-asistencia.herokuapp.com",
+    host: "crese-asistencia.herokuapp.com",
     basePath: "/API/v1",
     schemes: ["https" , "http"],
     securityDefinitions:{
