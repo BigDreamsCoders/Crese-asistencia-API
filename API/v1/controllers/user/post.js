@@ -25,7 +25,7 @@ const jwt = require("jsonwebtoken");
  *                              type: string
  *                              description: The user email address
  *                              example: 00062816@uca.edu.sv
- *                          passsword:
+ *                          password:
  *                              type: password
  *                              description: The personal secret string
  *                              example: bigSecret
@@ -125,7 +125,7 @@ exports.insertUser= (req, res, next) => {
  *                              type: string
  *                              description: The user email address
  *                              example: 00062816@uca.edu.sv
- *                          passsword:
+ *                          password:
  *                              type: password
  *                              description: The personal secret string
  *                              example: bigSecret
@@ -133,9 +133,6 @@ exports.insertUser= (req, res, next) => {
  *                              type: string
  *                              description: Nickname, the way it will be refered
  *                              example: AlexBig
- *              -   in: path
- *                  name: adminSecret
- *                  description: "The secret password to create admins"
  *          responses:
  *                  '201':
  *                      description: User record/s added
@@ -240,7 +237,7 @@ exports.insertAdmin= (req, res, next) => {
  *                          example: bigSecret
  *          responses:
  *              '200':
- *                  description: It will return a object with information
+ *                  description: It will return a token object
  *                  schema:
  *                     type: object
  *                     properties:
