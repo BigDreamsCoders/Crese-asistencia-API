@@ -7,8 +7,8 @@ const actionUPDATE = require("../controllers/faq/put");
 
 
 //Middleware Calls
-const vToken = require("../middleware/verifyToken");
-const vPermission = require("../middleware/verifyPermission");
+const vToken = require("../middleware/tokenVerify");
+const vPermission = require("../middleware/permissionVerify");
 
 //General description of the whole route
 /**

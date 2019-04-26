@@ -6,8 +6,8 @@ const actionsDELETE = require("../controllers/user/delete");
 const actionsUPDATE = require("../controllers/user/put");
 
 //Middleware Calls
-const vToken = require("../middleware/verifyToken");
-const vPermission = require("../middleware/verifyPermission");
+const vToken = require("../middleware/tokenVerify");
+const vPermission = require("../middleware/permissionVerify");
 
 //General description of the whole route
 /**
@@ -20,6 +20,7 @@ const vPermission = require("../middleware/verifyPermission");
 
 //GET endpoints
 router.get("/", vToken, vPermission("read", "user"),  actionsGET.allUsers);
+router.get("/token", vToken, actionsGET.checkToken);
 router.get("/:idUser", vToken, vPermission("read", "user"),   actionsGET.oneUser);
 //POST endpoints
 router.post("/", actionsPOST.insertUser);

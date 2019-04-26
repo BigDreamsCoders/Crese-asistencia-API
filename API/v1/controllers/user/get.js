@@ -116,3 +116,32 @@ exports.oneUser = (req,res,next) =>{
             });
         });
 };
+
+/**
+ * @swagger
+ * paths:
+ *  /user/token:
+ *      get:
+ *          tags:
+ *          - user
+ *          summary: Verifies if a token is still active
+ *          produces:
+ *          - "application/json"
+ *          parameters:
+ *            - name: Authorization
+ *              in: header
+ *              description: Authorization token format must be the following 'Bearer **********'
+ *              required: true
+ *              type: string
+ *          responses:
+ *              '200':
+ *                  description: Show the information of a user
+ *              '401':
+ *                  description: Your token expired
+ */
+
+exports.checkToken = (req,res,next) =>{
+    res.status(200).json({
+        message: "User verified, please continue to use the API"
+    })
+};

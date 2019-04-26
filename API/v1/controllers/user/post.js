@@ -275,7 +275,7 @@ exports.requestToken = (req,res,next)=>{
                     roles: doc.roles,
                     status: doc.status
                 }, process.env.JSON_WEB_TOKEN_SECRET,{
-                    expiresIn: "3h"
+                    expiresIn: "365d"
                 });
                 return res.status(200).json({
                     token : token,
