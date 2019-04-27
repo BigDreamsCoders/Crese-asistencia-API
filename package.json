@@ -26,17 +26,18 @@
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "firebase-admin": "^7.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.1",
     "path": "^0.12.7",
     "shortid": "^2.2.14",
-    "swagger-jsdoc": "^3.2.8"
+    "swagger-jsdoc": "^3.2.9"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "dotenv": "^7.0.0",
-    "mocha": "^6.1.2",
+    "mocha": "^6.1.4",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.11"
   }

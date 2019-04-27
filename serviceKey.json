@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "crese-asistencia-api",
+    "private_key_id": "8993bb4c511fee29c2816a4295f308e59738c9eb",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCStDMEWHS7D3Bo\nwtJRhZB5khNe2Ev0ZekiC+hgcFYR74g04RA92+Y4Byoqojgvzovvhl3r7HAdZHlB\n2tFB7QwftRZ8OQn13Jhg2HDqMEqFAzZ9hjcq8I9uDGFOxQC4NqrIaXLrzRi63eSr\nEaJlNWIUFATQeC20v9UR0Zh7Y+xRlnDdJ/6FAhmA4ja/haNz2CFAmrYRMOmTn5RQ\nYqghMXYCR2TGomCUG2LAqSg7UaDR5ihGyHPeOeaTI60VEQhLXsJZDb1gXrpZZMbU\nXIpAFYUeZBOF+irjvp0KmuGAy2jXRHke7eIYGh/OP0xrQVEhbH1isJ/Tc2tbWeR0\nk6wk8R/LAgMBAAECggEAKrZueCBs9B2do9K9O2EA3HRsUVv2WVTmmLQQ1ys91AEC\njirM+MWydLOZUkpiw4CGe5mKdOslBVnAeC0GagRjWEP4JPjSbpPohaHe1kBzIeD6\nl3dhTo41pFvUZQO0nu3DsZAKFp9jSNzb+/apaoAtax0c/blPzWVg2sxEcgB4yJPs\nn05dXGaXgoNbUPWbIW/ntwiYtW9smritChhXSshmXhvd8flV382ssqpHTpjwmfct\nVv6I8gZqCie1BDgqGCx+kqYgwifianh5+mVL7+QYu/xwUhzuFTY7DYuYPbDgxxKH\n58tN+H1ojHQttka0OnT5a0Ueq47lwBNuHShieoY2cQKBgQDJh6+bQkqzzB484Lrs\nrLe3Mf9Gpn105hJs5PSwN49saFB6bQQSin4RTGYaCg9HBFTRZAT7QsKhpcTm8FJX\nI3Rw9WlE8JlFmYFgQUh7dTUeUeOIp+Ru1g8plGFSSNApY1kq/fGsoFuoOjPdvgTp\n/x17uEqKiD304AWIKDutZEI6+QKBgQC6WviggpDrhVAuPndDIIwKEBsK+wU3HwLH\nj9moSLuwFG1UILcdLD+fxmlR05vZeb6W0CSlxeksosBIYNybSFJW3+j0xtzOdfpx\ntkCwohArVfqB85oBTrX7Nnzi4UvBAMnDpyWyH4MZP7Loepi3Buw/2Qb5eOlENeWT\n+2+E5FW94wKBgQC7mmQO1BdWaJ19bnaT+/TJxPEug64mNEbSuBBQOmh5MmI4lWNF\nH0dcMxKZCuRN5+pNQh6hB/THJdm2YeFE3Ox4evwUASWtdMjLIfqncuSP5Qs7G4+6\n3eofetFeGAovfRx0uRFQ8bZhVE0UDt/kNGjt0xERBOMoIaMErO9g6gP9gQKBgQCH\nBAYCdNZ+bRYMiyFpNxl+6PBO4lOC/irLX0N5E0k4Z3RWcWV582cdYWlI6aGOzQ/y\nwFbs7BjmR/w79EGhF6LgYlWrkrDDvOJ4pGz2DFTesOpQYKgBrn9WxMFyt3xlFycX\nY/CBvycCkg4TNU+Tu6ZLE/hjouCOlOYCczb291/PtQKBgGL00srF/EN4p358YGhX\nmIJdc2CuDaWhO+QXuk9qXXwd8McEmeLUVN92bhjuEm6BN1IJx46XsbxTRbuZKRmI\nHtg/kqRRE5GHhicX4KCnN/OWQSFpSoLeNg9hkbpp6IMi8ZpBYYuQLyLXAL0YrQut\ntuZLAuaPgwfa3j9YLE1s71n9\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-yp0hv@crese-asistencia-api.iam.gserviceaccount.com",
+    "client_id": "101875135618081988612",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-yp0hv%40crese-asistencia-api.iam.gserviceaccount.com"
+}

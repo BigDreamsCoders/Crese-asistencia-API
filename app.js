@@ -16,6 +16,7 @@ const errorHandler = require("./API/v1/middleware/errorHandler");
 //Tools used
 const DB = require("./API/v1/tools/DBConnection");
 
+
 // Creates a public route for access to documents in the "public" folder
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -28,6 +29,7 @@ const faqRoutes = require("./API/v1/routes/faq");
 
 //Connection to database
 DB(mongoose);
+//FireBase(admin, serviceAccount);
 
 //Accepts url bodies that are simple
 app.use(bodyParser.urlencoded({extended: false}));
@@ -48,5 +50,6 @@ app.use("/API/v1/faq", faqRoutes);
 // Not found route
 app.use("*", notFound);
 app.use("*", errorHandler);
+
 
 module.exports = app;
