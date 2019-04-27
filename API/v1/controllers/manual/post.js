@@ -1,5 +1,14 @@
 const manualModel = require("../../models/manual");
 
+const admin = require("firebase-admin");
+const message = {
+    topic: "/topics/AllDevices",
+    notification: {
+        title: "Nuevo manual agregado",
+    }
+}
+
+
 /**
  * @swagger
  * paths:
@@ -64,6 +73,11 @@ const manualModel = require("../../models/manual");
  *                      description: Some kind of error
  */
 
+
+
+
+
+
 exports.insertManual= (req, res, next) => {
     if(!req.body.name || !req.body.URL || !req.body.sourceType ||
         !req.body.dateCreated || !req.body.keywords || !req.body.category){
@@ -82,10 +96,18 @@ exports.insertManual= (req, res, next) => {
     const newManual = new manualModel(manualBody);
     newManual.save()
         .then((result) =>{
+            message.notification.body = name;
+            admin.messaging().send(message)
+                .then(function(response) {
+                    console.log("Successfully sent message:", response);
+                })
+                .catch(function(error) {
+                    console.log("Error sending message:", error);
+                });
             return res.status(201).json({
                 userData: newManual,
                 message: "Manual record created"
-            })
+            });
         }).catch(err =>{
             return res.status(500).json({
                 message: err.message

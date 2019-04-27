@@ -4,6 +4,10 @@ const bodyParser = require("body-parser");
 //const morgan = require("morgan");
 const path = require("path");
 const mongoose = require("mongoose");
+const admin = require("firebase-admin");
+
+//Get firebase key
+const serviceAccount = require("./serviceKey");
 
 //Set morgan up
 //app.use(morgan("dev"));
@@ -15,6 +19,7 @@ const errorHandler = require("./API/v1/middleware/errorHandler");
 
 //Tools used
 const DB = require("./API/v1/tools/DBConnection");
+const FB = require("./API/v1/tools/firebaseInit");
 
 
 // Creates a public route for access to documents in the "public" folder
@@ -29,7 +34,8 @@ const faqRoutes = require("./API/v1/routes/faq");
 
 //Connection to database
 DB(mongoose);
-//FireBase(admin, serviceAccount);
+//Connection to firebase
+FB(admin,serviceAccount);
 
 //Accepts url bodies that are simple
 app.use(bodyParser.urlencoded({extended: false}));

@@ -141,28 +141,8 @@ exports.oneUser = (req,res,next) =>{
  */
 
 
-const admin = require("firebase-admin");
-const serviceAccount = require("../../../../serviceKey.json");
-    
-const message = {
-    topic: "/topics/AllDevices",
-    notification: {
-        title: "Nuevo manual agregado",
-        body: "Se acaba de agregar un manual a Crese-asistencia"
-    }
-}
-const FB = require("../../tools/firebaseInit");
-FB(admin,serviceAccount);
-
-
 exports.checkToken = (req,res,next) =>{
-    admin.messaging().send(message)
-        .then(function(response) {
-            console.log("Successfully sent message:", response);
-        })
-        .catch(function(error) {
-            console.log("Error sending message:", error);
-        });
+    
     res.status(200).json({
         message: "User verified, please continue to use the API"
     });

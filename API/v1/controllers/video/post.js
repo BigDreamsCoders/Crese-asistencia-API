@@ -1,5 +1,13 @@
 const videoModel = require("../../models/video");
 
+const admin = require("firebase-admin");
+const message = {
+    topic: "/topics/AllDevices",
+    notification: {
+        title: "Nuevo video agregado",
+    }
+}
+
 /**
  * @swagger
  * paths:
@@ -82,6 +90,14 @@ exports.insertVideo= (req, res, next) => {
     const newVideo = new videoModel(videoBody);
     newVideo.save()
         .then((result) =>{
+            message.notification.body = name;
+            admin.messaging().send(message)
+                .then(function(response) {
+                    console.log("Successfully sent message:", response);
+                })
+                .catch(function(error) {
+                    console.log("Error sending message:", error);
+                });
             return res.status(201).json({
                 userData: newVideo,
                 message: "Video record created"
