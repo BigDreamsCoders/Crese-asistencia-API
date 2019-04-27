@@ -73,8 +73,7 @@ const message = {
  */
 
 exports.insertVideo= (req, res, next) => {
-    if(!req.body.name || !req.body.URL || !req.body.sourceType ||
-        !req.body.dateCreated || !req.body.keywords || !req.body.category){
+    if(!req.body.name || !req.body.URL || !req.body.sourceType || !req.body.keywords || !req.body.category){
         return res.status(422).json({
             message: "Missing fields"
         });
@@ -90,7 +89,7 @@ exports.insertVideo= (req, res, next) => {
     const newVideo = new videoModel(videoBody);
     newVideo.save()
         .then((result) =>{
-            message.notification.body = name;
+            message.notification.body = req.body.name;
             admin.messaging().send(message)
                 .then(function(response) {
                     console.log("Successfully sent message:", response);
