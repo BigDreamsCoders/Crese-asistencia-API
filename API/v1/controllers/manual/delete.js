@@ -18,7 +18,7 @@ const manualModel = require("../../models/manual");
  *              type: string
  *            - name: idManual
  *              in: path
- *              require: true
+ *              required: true
  *              description: Unique identifier of the user to delete
  *              type: string
  *          responses:
@@ -28,6 +28,8 @@ const manualModel = require("../../models/manual");
  *                  description: Your lack of permissions prevents you from accessing this route
  *              '404':
  *                  description: Manual not found
+ *              '422':
+ *                  description: Missing fields
  *              '500':
  *                  description: Some kind of error
  */

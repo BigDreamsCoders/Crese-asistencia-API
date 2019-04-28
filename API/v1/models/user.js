@@ -31,6 +31,12 @@ const getDate = require("../tools/getDate");
  *                  type: string
  *                  description: "If it's a client or an admin"
  *                  example: "client"
+ *              resetPasswordExpires:
+ *                  type: string
+ *                  description: How much time left until the token expries. It last one day
+ *              resetPasswordToken:
+ *                  type: string
+ *                  description: The token saved for the password reset
  *              settings:
  *                  type: object
  *                  properties:

@@ -18,9 +18,9 @@ const manualModel = require("../../models/manual");
  *              type: string
  *            - name: idManual
  *              in: path
- *              require: true
+ *              required: true
  *              description: Unique identifier of the manual to update
- *            - require: true
+ *            - required: true
  *              name: updateContent
  *              in: body
  *              description: An array of objects that contains the fields and values to be assigned

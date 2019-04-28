@@ -18,10 +18,10 @@ const faqModel = require("../../models/faq");
  *              type: string
  *            - name: idFaq
  *              in: path
- *              require: true
+ *              required: true
  *              description: Unique identifier of the FAQ to update
  *              type: string
- *            - require: true
+ *            - required: true
  *              name: updateContent
  *              in: body
  *              description: An array of objects that contains the fields and values to be assigned

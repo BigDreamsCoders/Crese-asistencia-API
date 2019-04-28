@@ -33,9 +33,6 @@ const jwt = require("jsonwebtoken");
  *                              type: string
  *                              description: Nickname, the way it will be refered
  *                              example: AlexBig
- *              -   in: path
- *                  name: adminSecret
- *                  description: "The secret password to create admins"
  *          responses:
  *                  '201':
  *                      description: User record/s added

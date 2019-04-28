@@ -18,7 +18,7 @@ const videoModel = require("../../models/video");
  *              type: string
  *            - name: idVideo
  *              in: path
- *              require: true
+ *              required: true
  *              description: Unique identifier of the video to delete
  *              type: string
  *          responses:
@@ -28,6 +28,8 @@ const videoModel = require("../../models/video");
  *                  description: Your lack of permissions prevents you from accessing this route
  *              '404':
  *                  description: Video not found
+ *              '422':
+ *                  description: Missing fields
  *              '500':
  *                  description: Some kind of error
  */

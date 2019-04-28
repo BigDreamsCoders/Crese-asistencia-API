@@ -18,7 +18,7 @@ const userModel = require("../../models/user");
  *              type: string
  *            - name: idUser
  *              in: path
- *              require: true
+ *              required: true
  *              description: Unique identifier of the user to delete
  *              type: string
  *          responses:
@@ -28,6 +28,8 @@ const userModel = require("../../models/user");
  *                  description: Your lack of permissions prevents you for accessing this route
  *              '404':
  *                  description: User not found
+ *              '422':
+ *                  description: Missing fields
  *              '500':
  *                  description: Some kind of error
  */

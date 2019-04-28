@@ -74,10 +74,6 @@ const message = {
  */
 
 
-
-
-
-
 exports.insertManual= (req, res, next) => {
     if(!req.body.name || !req.body.URL || !req.body.sourceType || !req.body.keywords || !req.body.category){
         return res.status(422).json({

@@ -18,7 +18,7 @@ const faqModel = require("../../models/faq");
  *              type: string
  *            - name: idFaq
  *              in: path
- *              require: true
+ *              required: true
  *              description: Unique identifier of the user to delete
  *              type: string
  *          responses:
@@ -28,6 +28,8 @@ const faqModel = require("../../models/faq");
  *                  description: Your lack of permissions prevents you from accessing this route
  *              '404':
  *                  description: FAQ not found
+ *              '422':
+ *                  description: Missing fields
  *              '500':
  *                  description: Some kind of error
  */

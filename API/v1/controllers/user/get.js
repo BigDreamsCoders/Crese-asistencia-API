@@ -174,12 +174,37 @@ exports.oneUser = (req,res,next) =>{
 
 
 exports.checkToken = (req,res,next) =>{
-    
     res.status(200).json({
         message: "User verified, please continue to use the API"
     });
 };
 
+
+/**
+ * @swagger
+ * paths:
+ *  /user/token/forgot-password?email=test@email.com:
+ *      get:
+ *          tags:
+ *          - user
+ *          summary: Sends an email with token a to change a user password
+ *          produces:
+ *          - "application/json"
+ *          parameters:
+ *            - name: email
+ *              in: query
+ *              required: true
+ *              schema:
+ *                  type: string
+ *              description: The email of the user that lost the password
+ *          responses:
+ *              '200':
+ *                  description: Kindly check your email for further instructions
+ *              '404':
+ *                  description: Email not found in database
+ *              '500':
+ *                  description: Some kind of error
+ */
 
 exports.forgotPassword = (req, res, next)=> {
     if(!req.query.email){
@@ -192,7 +217,7 @@ exports.forgotPassword = (req, res, next)=> {
         .then(user=>{
             if (!user) {
                 return res.status(404).json({
-                    message: "User record not found",
+                    message: "Email not found in database",
                 });
             }
             const token = jwt.sign({
@@ -219,7 +244,7 @@ exports.forgotPassword = (req, res, next)=> {
                         if (!err) {
                             return res.status(200).json({ message: "Kindly check your email for further instructions" });
                         } else {
-                            return res.status(422).json({ message: err });
+                            return res.status(500).json({ message: err });
                         }
                     });
                 })
@@ -234,6 +259,46 @@ exports.forgotPassword = (req, res, next)=> {
             });
         });
 }
+
+/**
+ * @swagger
+ * paths:
+ *  /user/token/reset-password?token=string&newPassword=password&verifyPassword=password:
+ *      get:
+ *          tags:
+ *          - user
+ *          summary: Resets the password to a new one
+ *          produces:
+ *          - "application/json"
+ *          parameters:
+ *            - name: token
+ *              in: query
+ *              required: true
+ *              schema:
+ *                  type: string
+ *              description: The token delivered by email
+ *            - name: newPassword
+ *              in: query
+ *              required: true
+ *              schema:
+ *                  type: string
+ *              description: The string of text that will be the new password
+ *            - name: verifyPassword
+ *              in: query
+ *              required: true
+ *              schema:
+ *                  type: string
+ *              description: Repetition of newPassword to confirm the new password
+ *          responses:
+ *              '200':
+ *                  description: Kindly check your email for further instructions
+ *              '401':
+ *                  description: Password reset token is invalid or has expired
+ *              '422':
+ *                  description: Passwords issue
+ *              '500':
+ *                  description: Some kind of error
+ */
 
 exports.resetPassword = (req, res, next)=> {
     if(!req.query.newPassword || !req.query.verifyPassword){
@@ -259,7 +324,7 @@ exports.resetPassword = (req, res, next)=> {
                     user.resetPasswordExpires = undefined;
                     user.save((err) => {
                         if (err) {
-                            return res.status(422).send({
+                            return res.status(500).send({
                                 message: err
                             });
                         }
@@ -277,7 +342,7 @@ exports.resetPassword = (req, res, next)=> {
                                 console.log("end");
                                 return res.status(200).json({ message: "Password reset" });
                             } else {
-                                return res.status(422).json({ message: err });
+                                return res.status(500).json({ message: err });
                             }
                         });
                     });
@@ -289,8 +354,8 @@ exports.resetPassword = (req, res, next)=> {
                 });
             }
         }
-        return res.status(400).send({
-            message: "Password reset token is invalid or has expired."
+        return res.status(401).send({
+            message: "Password reset token is invalid or has expired"
         });
         
     }).catch(err =>{

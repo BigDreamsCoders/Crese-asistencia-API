@@ -19,7 +19,7 @@ const numberSettings = 3;
  *              required: true
  *              type: string
  *            - name: settings
- *              require: true
+ *              required: true
  *              in: body
  *              description: An array of objects that contains the fields and values to be assigned
  *              type: array
