@@ -8,9 +8,6 @@ const  hbs = require("nodemailer-express-handlebars"),
     mailerPass = process.env.MAILER_PASSWORD || "auth_email_pass"
 nodemailer = require("nodemailer");
 
-console.log(mailerEmail);
-console.log(mailerPass);
-console.log(process.env.MAILER_SERVICE_PROVIDER);
 
 const smtpTransport = nodemailer.createTransport({
     service: process.env.MAILER_SERVICE_PROVIDER || "Gmail",
