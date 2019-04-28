@@ -14,7 +14,7 @@ const vPermission = require("../middleware/permissionVerify");
  *   @swagger
  *   tags:
  *      name: user
- *      description: This section will describe all the avaible routes that are related to user data model
+ *      description: This section describes all the available routes that are related to user data model
  *
  */
 
