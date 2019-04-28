@@ -60,7 +60,9 @@ const userSchema = mongoose.Schema({
         notifications: {type: String, default: "enabled"},
         sounds: {type: String, default: "enabled"},
         darkMode: {type: String, default: "enabled"}
-    }
+    },
+    resetPasswordToken: {type: String},
+    resetPasswordExpires: {type: String}
 });
 
 module.exports = mongoose.model("user", userSchema);

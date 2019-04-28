@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-//const morgan = require("morgan");
+const morgan = require("morgan");
 const path = require("path");
-const mongoose = require("mongoose");
+//const mongoose = require("mongoose");
 const admin = require("firebase-admin");
+
 
 //Get firebase key
 const serviceAccount = require("./serviceKey");

@@ -83,9 +83,6 @@ exports.insertUser= (req, res, next) => {
                             message: "User record created"
                         })
                     }).catch(err =>{
-                        /*res.status(422).json({
-                            message: "Record had a conflict",
-                        });*/
                         return res.status(500).json({
                             message: err.message
                         });
@@ -292,3 +289,5 @@ exports.requestToken = (req,res,next)=>{
         });
     });
 };
+
+

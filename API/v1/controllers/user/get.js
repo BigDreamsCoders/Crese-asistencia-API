@@ -1,4 +1,33 @@
 const userModel = require("../../models/user");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+
+const  hbs = require("nodemailer-express-handlebars"),
+    mailerEmail = process.env.MAILER_EMAIL_ID || "auth_email_address@gmail.com",
+    mailerPass = process.env.MAILER_PASSWORD || "auth_email_pass"
+nodemailer = require("nodemailer");
+
+
+const smtpTransport = nodemailer.createTransport({
+    service: process.env.MAILER_SERVICE_PROVIDER || "Gmail",
+    auth: {
+        user: mailerEmail,
+        pass: mailerPass
+    }
+});
+
+const handlebarOptions = {
+    viewEngine: {
+        extName: ".html",
+        partialsDir: "API/v1/templates/",
+        layoutsDir: "API/v1/templates/"
+    },
+    viewPath: "API/v1/templates/",
+    extName: ".html",
+};
+
+smtpTransport.use("compile", hbs(handlebarOptions));
 
 /**
  * @swagger
@@ -47,7 +76,8 @@ exports.allUsers = (req,res,next) =>{
                     roles : doc.roles,
                     dateCreated : doc.dateCreated,
                     status : doc.status,
-                    settings: doc.settings
+                    settings: doc.settings,
+                    resetPasswordToken: doc.resetPasswordToken
                 }
             }),
             message: "All the users",
@@ -146,4 +176,124 @@ exports.checkToken = (req,res,next) =>{
     res.status(200).json({
         message: "User verified, please continue to use the API"
     });
+};
+
+
+exports.forgotPassword = (req, res, next)=> {
+    if(!req.query.email){
+        return res.status(422).json({
+            message: "Missing fields"
+        })
+    }
+    const result = {};
+    userModel.findOne({email: req.query.email}).exec()
+        .then(user=>{
+            if (!user) {
+                return res.status(404).json({
+                    message: "User record not found",
+                });
+            }
+            const token = jwt.sign({
+                idUser: user._id,
+                email: user.email
+            }, process.env.JSON_WEB_TOKEN_SECRET,{
+                expiresIn: "1d"
+            });
+            result.user = user;
+            userModel.updateOne({ _id: result.user._id },
+                { resetPasswordToken: token, resetPasswordExpires: Date.now() + 86400000 })
+                .exec().then((newUser) => {
+                    const data = {
+                        to: user.email,
+                        from: mailerEmail,
+                        template: "forgot-password",
+                        subject: "Password help has arrived!",
+                        context: {
+                            url: process.env.BASE_URL+"/API/v1/user/reset-password?token=" + token,
+                            name: user.account
+                        }
+                    };
+                    smtpTransport.sendMail(data, (err) =>{
+                        if (!err) {
+                            return res.status(200).json({ message: "Kindly check your email for further instructions" });
+                        } else {
+                            return res.status(422).json({ message: err });
+                        }
+                    });
+                })
+                .catch(err =>{
+                    return res.status(500).json({
+                        message: err.message
+                    });
+                })
+        }).catch(err =>{
+            return res.status(500).json({
+                message: err.message
+            });
+        });
+}
+
+exports.resetPassword = (req, res, next)=> {
+    if(!req.query.newPassword || !req.query.verifyPassword){
+        return res.status(422).json({
+            message: "Add the new password"
+        })
+    }
+    userModel.findOne({
+        resetPasswordToken: req.query.token,
+        resetPasswordExpires: {
+            $gt: Date.now()}
+    }).exec().then((user) =>{
+        if (user) {
+            if (req.query.newPassword === req.query.verifyPassword) {
+                bcrypt.hash(req.query.newPassword, parseInt(process.env.SALT_ROUNDS), (err,hash)=>{
+                    if(err){
+                        return res.status(500).json({
+                            message: err.message
+                        });
+                    }
+                    user.password = hash;
+                    user.resetPasswordToken = undefined;
+                    user.resetPasswordExpires = undefined;
+                    user.save((err) => {
+                        if (err) {
+                            return res.status(422).send({
+                                message: err
+                            });
+                        }
+                        const data = {
+                            to: user.email,
+                            from: mailerEmail,
+                            template: "reset-password",
+                            subject: "Password Reset Confirmation",
+                            context: {
+                                name: user.account
+                            }
+                        };
+                        smtpTransport.sendMail(data, (err) =>{
+                            if (!err) {
+                                console.log("end");
+                                return res.status(200).json({ message: "Password reset" });
+                            } else {
+                                return res.status(422).json({ message: err });
+                            }
+                        });
+                    });
+                })
+            }
+            else{
+                return res.status(422).send({
+                    message: "Passwords issue"
+                });
+            }
+        }
+        return res.status(400).send({
+            message: "Password reset token is invalid or has expired."
+        });
+        
+    }).catch(err =>{
+        return res.status(500).json({
+            message: err.message
+        });
+    });;
 };
