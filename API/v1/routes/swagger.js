@@ -4,6 +4,7 @@ const swaggerJSDoc = require("swagger-jsdoc");
 
 // General definition of a Swagger document
 const swaggerDefinition = {
+
     info: {
         title: "Crese-asistencia API",
         version: "1.0.0",
@@ -22,10 +23,11 @@ const swaggerDefinition = {
 };
 // Options for Swagger
 const options = {
+    openapi: "2.0",
     // Imports the swaggerDefinition ^
     swaggerDefinition: swaggerDefinition,
     // Which places will it read
-    apis: ["./API/v1/controllers/**/*.js","./API/v1/models/*.js", "./API/v1/routes/*.js"],// pass all in array
+    apis: ["./API/v1/models/*.js", "./API/v1/routes/*.js", "./API/v1/controllers/**/*.js"],// pass all in array
 };
 // Initialize the Swagger document
 const swaggerSpec = swaggerJSDoc(options);
