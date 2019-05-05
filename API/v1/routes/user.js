@@ -31,6 +31,7 @@ router.post("/login", actionsPOST.requestToken);
 //DELETE endpoints
 router.delete("/:idUser", vToken, vPermission("delete", "user"),  actionsDELETE.deleteUser);
 //UPDATE endpoints
+router.put("/:idUser", vToken, vPermission("update", "user"), actionsUPDATE.patchUser);
 router.put("/settings", vToken, actionsUPDATE.patchSettings);
 
 

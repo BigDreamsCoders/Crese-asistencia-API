@@ -1,4 +1,4 @@
-const faqModel = require("../../models/faq");
+const videoModel = require("../../models/video");
 
 /**
  * @swagger
@@ -52,7 +52,7 @@ exports.patchVideo = (req,res,next)=>{
     for(const option of req.body.updateContent){
         fieldsToChange[option.change] = option.value;
     }
-    faqModel.updateOne({_id: idVideo}, { $set : fieldsToChange })
+    videoModel.updateOne({_id: idVideo}, { $set : fieldsToChange })
         .exec()
         .then(resultado => {
             res.status(200).json({message: "Video updated"});

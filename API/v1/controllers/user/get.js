@@ -66,7 +66,7 @@ smtpTransport.use("compile", hbs(handlebarOptions));
  */
 
 exports.allUsers = (req,res,next) =>{
-    userModel.find({}).then(docs=>{
+    userModel.find({roles: {$ne: "superadmin"}}).then(docs=>{
         return res.status(200).json({
             count: docs.length,
             users: docs.map(doc =>{

@@ -167,7 +167,7 @@ exports.insertAdmin= (req, res, next) => {
                     account: req.body.account,
                     email: req.body.email,
                     password: hash,
-                    roles: "admin"
+                    roles: req.body.roles
                 };
                 const newUser = new userModel(userBody);
                 newUser.save()
