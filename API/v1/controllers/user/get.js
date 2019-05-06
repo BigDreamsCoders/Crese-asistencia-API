@@ -236,7 +236,7 @@ exports.forgotPassword = (req, res, next)=> {
                         template: "forgot-password",
                         subject: "Password help has arrived!",
                         context: {
-                            url: process.env.BASE_URL+"/API/v1/user/reset-password?token=" + token,
+                            url: "https://bigdreamscoders.github.io/Crese-asistencia-sysadmin/passwordReset.html/reset-password?token=" + token,
                             name: user.account
                         }
                     };
