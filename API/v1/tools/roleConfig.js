@@ -23,6 +23,10 @@ module.exports = roles = [
             {
                 id : "faq",
                 permissions: ["create", "read", "update", "delete"]
+            },
+            {
+                id : "requisition",
+                permissions: ["create", "read", "update", "delete"]
             }
         ]
     },{
@@ -44,6 +48,10 @@ module.exports = roles = [
             {
                 id : "faq",
                 permissions: ["create", "read", "update", "delete"]
+            },
+            {
+                id : "requisition",
+                permissions: ["create", "read", "update", "delete"]
             }
         ]
     },
@@ -62,6 +70,10 @@ module.exports = roles = [
             {
                 id : "faq",
                 permissions: ["read"]
+            },
+            {
+                id : "requisition",
+                permissions: ["create"]
             }
         ]
     }

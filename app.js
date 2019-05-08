@@ -32,6 +32,7 @@ const userRoutes = require("./API/v1/routes/user");
 const manualRoutes = require("./API/v1/routes/manual");
 const videoRoutes = require("./API/v1/routes/video");
 const faqRoutes = require("./API/v1/routes/faq");
+const requisitionRoutes = require("./API/v1/routes/requisition");
 
 //Connection to database
 DB(mongoose);
@@ -53,6 +54,7 @@ app.use("/API/v1/user", userRoutes);
 app.use("/API/v1/manual", manualRoutes);
 app.use("/API/v1/video", videoRoutes);
 app.use("/API/v1/faq", faqRoutes);
+app.use("/API/v1/requisition", requisitionRoutes);
 
 // Not found route
 app.use("*", notFound);
