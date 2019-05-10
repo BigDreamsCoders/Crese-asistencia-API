@@ -407,9 +407,11 @@ exports.resetPassword = (req, res, next)=> {
                 });
             }
         }
-        return res.status(401).send({
-            message: "Password reset token is invalid or has expired"
-        });
+        else{
+            return res.status(401).send({
+                message: "Password reset token is invalid or has expired"
+            });
+        }
         
     }).catch(err =>{
         return res.status(500).json({
