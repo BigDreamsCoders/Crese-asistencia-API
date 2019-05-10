@@ -304,10 +304,16 @@ exports.resetPassword = (req, res, next)=> {
     if(!req.query.newPassword || !req.query.verifyPassword){
         return res.status(422).json({
             message: "Add the new password"
-        })
+        });
+    }
+    if(req.headers.authorization){
+        token = req.headers.authorization.split(" ")[1];
+    }
+    else if (req.query.token){
+        token = req.query.token;
     }
     userModel.findOne({
-        resetPasswordToken: req.query.token,
+        resetPasswordToken: token,
         resetPasswordExpires: {
             $gt: Date.now()}
     }).exec().then((user) =>{
