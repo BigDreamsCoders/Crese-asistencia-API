@@ -2,6 +2,33 @@ const userModel = require("../../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const  hbs = require("nodemailer-express-handlebars"),
+    mailerEmail = process.env.MAILER_EMAIL_ID || "auth_email_address@gmail.com",
+    mailerPass = process.env.MAILER_PASSWORD || "auth_email_pass"
+nodemailer = require("nodemailer");
+
+
+const smtpTransport = nodemailer.createTransport({
+    service: process.env.MAILER_SERVICE_PROVIDER || "Gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    auth: {
+        user: mailerEmail,
+        pass: mailerPass
+    }
+});
+
+const handlebarOptions = {
+    viewEngine: {
+        extName: ".html",
+        partialsDir: "API/v1/templates/",
+        layoutsDir: "API/v1/templates/"
+    },
+    viewPath: "API/v1/templates/",
+    extName: ".html",
+};
+
+smtpTransport.use("compile", hbs(handlebarOptions));
 
 /**
  * @swagger
