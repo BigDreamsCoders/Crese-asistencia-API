@@ -392,7 +392,6 @@ exports.resetPassword = (req, res, next)=> {
                         };
                         smtpTransport.sendMail(data, (err) =>{
                             if (!err) {
-                                console.log("end");
                                 return res.status(200).json({ message: "Password reset" });
                             } else {
                                 return res.status(500).json({ message: err });
