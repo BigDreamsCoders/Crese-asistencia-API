@@ -315,7 +315,6 @@ exports.requestToken = (req,res,next)=>{
  *                      token:
  *                          type: string
  *                          example: tokengiven
- *              description: Repetition of newPassword to confirm the new password
  *          responses:
  *              '200':
  *                  description: Kindly check your email for further instructions
