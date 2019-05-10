@@ -22,12 +22,13 @@ const vPermission = require("../middleware/permissionVerify");
 router.get("/", vToken, vPermission("read", "user"),  actionsGET.allUsers);
 router.get("/token", vToken, actionsGET.checkToken);
 router.get("/forgot-password", actionsGET.forgotPassword);
-router.get("/reset-password", actionsGET.resetPassword);
+
 router.get("/:idUser", vToken, vPermission("read", "user"),   actionsGET.oneUser);
 //POST endpoints
 router.post("/", actionsPOST.insertUser);
 router.post("/admin", vToken, vPermission("create", "admin"), actionsPOST.insertAdmin);
 router.post("/login", actionsPOST.requestToken);
+router.get("/reset-password", actionsPOST.resetPassword);
 //DELETE endpoints
 router.delete("/:idUser", vToken, vPermission("delete", "user"),  actionsDELETE.deleteUser);
 //UPDATE endpoints

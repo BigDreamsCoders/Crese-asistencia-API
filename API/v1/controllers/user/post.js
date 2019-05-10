@@ -288,3 +288,106 @@ exports.requestToken = (req,res,next)=>{
 };
 
 
+/**
+ * @swagger
+ * paths:
+ *  /user/token/reset-password:
+ *      post:
+ *          tags:
+ *          - user
+ *          summary: Resets the password to a new one
+ *          produces:
+ *          - "application/json"
+ *          parameters:
+ *            - name: Reset info
+ *              in: body
+ *              description: Login method making use of the email address
+ *              required: true
+ *              schema:
+ *                  type: object
+ *                  properties:
+ *                      newPassword:
+ *                          type: string
+ *                          example: stringtext
+ *                      verifyPassword:
+ *                          type: string
+ *                          example: stringtext
+ *                      token:
+ *                          type: string
+ *                          example: tokengiven
+ *              description: Repetition of newPassword to confirm the new password
+ *          responses:
+ *              '200':
+ *                  description: Kindly check your email for further instructions
+ *              '401':
+ *                  description: Password reset token is invalid or has expired
+ *              '422':
+ *                  description: Passwords issue
+ *              '500':
+ *                  description: Some kind of error
+ */
+
+exports.resetPassword = (req, res, next)=> {
+    if(!req.body.newPassword || !req.body.verifyPassword || !req.body.token){
+        return res.status(422).json({
+            message: "Add the new password"
+        });
+    }
+    userModel.findOne({
+        resetPasswordToken: req.body.token,
+        resetPasswordExpires: {
+            $gt: Date.now()}
+    }).exec().then((user) =>{
+        if (user) {
+            if (req.body.newPassword === req.body.verifyPassword) {
+                bcrypt.hash(req.body.newPassword, parseInt(process.env.SALT_ROUNDS), (err,hash)=>{
+                    if(err){
+                        return res.status(500).json({
+                            message: err.message
+                        });
+                    }
+                    user.password = hash;
+                    user.resetPasswordToken = undefined;
+                    user.resetPasswordExpires = undefined;
+                    user.save((err) => {
+                        if (err) {
+                            return res.status(500).send({
+                                message: err
+                            });
+                        }
+                        const data = {
+                            to: user.email,
+                            from: mailerEmail,
+                            template: "reset-password",
+                            subject: "Password Reset Confirmation",
+                            context: {
+                                name: user.account
+                            }
+                        };
+                        smtpTransport.sendMail(data, (err) =>{
+                            if (!err) {
+                                console.log("end");
+                                return res.status(200).json({ message: "Password reset" });
+                            } else {
+                                return res.status(500).json({ message: err });
+                            }
+                        });
+                    });
+                })
+            }
+            else{
+                return res.status(422).send({
+                    message: "Passwords issue"
+                });
+            }
+        }
+        return res.status(401).send({
+            message: "Password reset token is invalid or has expired"
+        });
+        
+    }).catch(err =>{
+        return res.status(500).json({
+            message: err.message
+        });
+    });;
+};
