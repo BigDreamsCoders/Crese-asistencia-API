@@ -28,7 +28,7 @@ router.get("/:idUser", vToken, vPermission("read", "user"),   actionsGET.oneUser
 router.post("/", actionsPOST.insertUser);
 router.post("/admin", vToken, vPermission("create", "admin"), actionsPOST.insertAdmin);
 router.post("/login", actionsPOST.requestToken);
-router.get("/reset-password", actionsPOST.resetPassword);
+router.post("/reset-password", actionsPOST.resetPassword);
 //DELETE endpoints
 router.delete("/:idUser", vToken, vPermission("delete", "user"),  actionsDELETE.deleteUser);
 //UPDATE endpoints
