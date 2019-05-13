@@ -385,7 +385,7 @@ exports.resetPassword = (req, res, next)=> {
                             to: user.email,
                             from: mailerEmail,
                             template: "reset-password",
-                            subject: "Password Reset Confirmation",
+                            subject: "Confirmación de restablecimiento de contraseña",
                             context: {
                                 name: user.account
                             }

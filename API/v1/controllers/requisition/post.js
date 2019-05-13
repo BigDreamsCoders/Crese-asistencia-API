@@ -80,7 +80,7 @@ exports.requestPrice = (req, res, next)=> {
         to: mailerEmail,
         from: req.body.email,
         template: "make-requisition",
-        subject: "A requisition came!",
+        subject: "Vino una requisición!",
         context: {
             account: userData.account,
             message: req.body.content,

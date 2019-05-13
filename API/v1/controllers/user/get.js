@@ -234,7 +234,7 @@ exports.forgotPassword = (req, res, next)=> {
                         to: user.email,
                         from: mailerEmail,
                         template: "forgot-password",
-                        subject: "Password help has arrived!",
+                        subject: "¡La ayuda para tu contraseña ha llegado!",
                         context: {
                             url: "https://bigdreamscoders.github.io/Crese-asistencia-sysadmin/passwordReset.html?token=" + token,
                             name: user.account
