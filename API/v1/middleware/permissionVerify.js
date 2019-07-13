@@ -5,7 +5,8 @@ const roleConfig = require("../tools/roleConfig");
  * @param {string} allowed - action being made
  * @param {string} model - in which data model the action is being made
  */
-module.exports = function (allowed, model){
+
+module.exports = (allowed, model)=>{
     const isAllowed = allowed;
     const isModel = model;
     //Return a middleware for the route
@@ -20,7 +21,7 @@ module.exports = function (allowed, model){
             });
             //Enter if the user role was found
             if(foundRole){
-                //Similar to the firts it searchs for the resource involved in the controller
+                //Similar to the first it searchs for the resource involved in the controller
                 const foundModel = foundRole.resource.find((element)=>{
                     if(element.id==isModel){
                         return element;
